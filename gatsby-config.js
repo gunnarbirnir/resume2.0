@@ -28,6 +28,9 @@ module.exports = {
         theme_color: `#60aefb`,
         display: `minimal-ui`,
         icon: `assets/icons/gbo.png`,
+        icon_options: {
+          purpose: `maskable any`,
+        },
       },
     },
     `gatsby-plugin-offline`,
