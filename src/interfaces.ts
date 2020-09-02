@@ -15,5 +15,6 @@ export interface IContentfulData {
 
 export interface IPersonalInfo extends IContentfulData {
   name: string;
+  email: string;
   jobTitle: string;
 }

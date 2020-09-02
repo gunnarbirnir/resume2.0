@@ -5,6 +5,7 @@ export const query = graphql`
     id
     node_locale
     name
+    email
     jobTitle
   }
 `;

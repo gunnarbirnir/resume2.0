@@ -18,7 +18,9 @@ const About: React.FC<IProps> = ({ info, locale }) => {
   return (
     <div>
       <h1>{info.name}</h1>
-      <p>{info.jobTitle}</p>
+      <p>
+        {info.jobTitle} - {info.email}
+      </p>
       <Link to={localeIS ? '/en' : '/'}>
         {localeIS ? 'English' : 'Íslenska'}
       </Link>
