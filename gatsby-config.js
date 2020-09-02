@@ -26,6 +26,7 @@ module.exports = {
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#60aefb`,
+        display: `minimal-ui`,
         icon: `assets/icons/gbo.png`,
       },
     },
