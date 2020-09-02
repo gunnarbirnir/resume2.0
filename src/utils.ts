@@ -5,6 +5,10 @@ export function getLocale(pathname: string): ILocale {
   return path[1] === 'en' ? 'en-US' : 'is';
 }
 
+export function getShortLocale(locale: ILocale): 'is' | 'en' {
+  return locale === 'is' ? 'is' : 'en';
+}
+
 export function getFirstOfLocale<T extends IContentfulData>(
   edges: IEdges<T>,
   locale: ILocale
