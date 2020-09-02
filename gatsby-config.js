@@ -26,11 +26,8 @@ module.exports = {
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#60aefb`,
-        display: `minimal-ui`,
+        display: `fullscreen`,
         icon: `assets/icons/gbo-bg.png`,
-        icon_options: {
-          purpose: `maskable any`,
-        },
       },
     },
     `gatsby-plugin-offline`,
@@ -48,5 +45,6 @@ module.exports = {
         defaultLocale: 'is',
       },
     },
+    `gatsby-plugin-favicon`,
   ],
 };
