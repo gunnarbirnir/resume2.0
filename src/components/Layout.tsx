@@ -19,7 +19,10 @@ const useStyles = createUseStyles({
     p: { marginBottom: 0 },
   },
   container: {
+    display: 'flex',
+    flexDirection: 'column',
     margin: spacing(3),
+    minHeight: `calc(100vh - ${spacing(6)})`,
   },
 });
 

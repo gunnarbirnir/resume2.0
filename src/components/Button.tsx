@@ -1,19 +1,20 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
+import cx from 'classnames';
 
-import SEO, { IProps as SEOProps } from './SEO';
 import { ITheme } from '../interfaces';
 import { spacing } from '../utils';
 
 interface IProps {
   onClick: () => void;
+  size?: 'small' | 'default' | 'large';
+  className?: string;
 }
 
 const useStyles = createUseStyles((theme: ITheme) => ({
   container: {
     color: theme.colors.white,
     backgroundColor: theme.colors.primary,
-    padding: spacing(1, 2),
     cursor: 'pointer',
     border: 'none',
     outline: 0,
@@ -22,13 +23,30 @@ const useStyles = createUseStyles((theme: ITheme) => ({
       backgroundColor: theme.colors.primaryDarker,
     },
   },
+  small: {
+    padding: '4px 12px',
+  },
+  default: {
+    padding: spacing(1, 2),
+  },
+  large: {
+    padding: spacing(2, 3),
+  },
 }));
 
-const Button: React.FC<IProps> = ({ children, onClick }) => {
+const Button: React.FC<IProps> = ({
+  size = 'default',
+  children,
+  className,
+  onClick,
+}) => {
   const classes = useStyles();
 
   return (
-    <button onClick={onClick} className={classes.container}>
+    <button
+      onClick={onClick}
+      className={cx(classes.container, classes[size], className)}
+    >
       {children}
     </button>
   );

@@ -7,5 +7,8 @@ export const query = graphql`
     name
     email
     jobTitle
+    about {
+      about
+    }
   }
 `;

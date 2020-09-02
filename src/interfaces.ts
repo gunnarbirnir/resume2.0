@@ -27,6 +27,9 @@ export interface ITheme {
     mdUp: string;
     lgUp: string;
   };
+  dimensions: {
+    contentWidth: number;
+  };
 }
 
 export interface IPageProps {
@@ -44,4 +47,7 @@ export interface IPersonalInfo extends IContentfulData {
   name: string;
   email: string;
   jobTitle: string;
+  about: {
+    about: string;
+  };
 }

@@ -1,9 +1,8 @@
 import React from 'react';
-import { navigate } from 'gatsby';
 import { createUseStyles } from 'react-jss';
 
 import Button from './Button';
-import { IPersonalInfo, ILocale } from '../interfaces';
+import { IPersonalInfo, ILocale, ITheme } from '../interfaces';
 import { spacing } from '../utils';
 
 interface IProps {
@@ -11,14 +10,28 @@ interface IProps {
   locale: ILocale;
 }
 
-const useStyles = createUseStyles({
+const useStyles = createUseStyles((theme: ITheme) => ({
+  container: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
+  content: {
+    maxWidth: 600,
+  },
   title: {
     marginBottom: spacing(2),
   },
   info: {
-    marginBottom: spacing(2),
+    marginBottom: spacing(3),
   },
-});
+  button: {
+    marginRight: spacing(1),
+    marginBottom: spacing(1),
+  },
+}));
 
 const About: React.FC<IProps> = ({ info, locale }) => {
   const classes = useStyles();
@@ -29,16 +42,24 @@ const About: React.FC<IProps> = ({ info, locale }) => {
   }
 
   return (
-    <div>
-      <h1 className={classes.title}>{info.name}</h1>
-      <p className={classes.info}>
-        {info.jobTitle} - {info.email}
-      </p>
-      <Button onClick={() => navigate(localeIS ? '/en' : '/')}>
-        {localeIS ? 'English' : 'Íslenska'}
-      </Button>
+    <div className={classes.container}>
+      <div className={classes.content}>
+        <h1 className={classes.title}>{info.name}</h1>
+        <p className={classes.info}>{info.about.about}</p>
+        {['Störf', 'Verkefni', 'Viðurkenningar', 'Kunnátta', 'Meðmæli'].map(
+          renderButton
+        )}
+      </div>
     </div>
   );
+
+  function renderButton(text: string) {
+    return (
+      <Button size="small" onClick={() => null} className={classes.button}>
+        {text}
+      </Button>
+    );
+  }
 };
 
 export default About;

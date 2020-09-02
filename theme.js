@@ -7,11 +7,11 @@ const breakpoints = {
 
 module.exports = {
   colors: {
-    primary: '#60aefb',
-    primaryDarker: '#348ce3',
+    primary: '#20c9b5',
+    primaryDarker: '#1fad9c',
     background: '#ffffff',
     textPrimary: '#2e2e2e',
-    textSecondary: '#595959',
+    textSecondary: '#707070',
     white: '#ffffff',
   },
   breakpoints,
@@ -24,5 +24,8 @@ module.exports = {
     smUp: `@media (min-width: ${breakpoints.sm}px)`,
     mdUp: `@media (min-width: ${breakpoints.md}px)`,
     lgUp: `@media (min-width: ${breakpoints.lg}px)`,
+  },
+  dimensions: {
+    contentWidth: 1200,
   },
 };
