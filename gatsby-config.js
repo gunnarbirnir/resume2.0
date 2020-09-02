@@ -27,7 +27,7 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#60aefb`,
         display: `minimal-ui`,
-        icon: `assets/icons/gbo.png`,
+        icon: `assets/icons/gbo-bg.png`,
         icon_options: {
           purpose: `maskable any`,
         },
