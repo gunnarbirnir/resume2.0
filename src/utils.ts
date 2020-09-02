@@ -20,3 +20,24 @@ export function getFirstOfLocale<T extends IContentfulData>(
   }
   return null;
 }
+
+export function spacing(
+  size: number,
+  size2?: number,
+  size3?: number,
+  size4?: number
+) {
+  const scale = 8;
+  let spacingVal = `${size * scale}px`;
+
+  if (size2) {
+    spacingVal += ` ${size2 * scale}px`;
+  }
+  if (size3) {
+    spacingVal += ` ${size3 * scale}px`;
+  }
+  if (size4) {
+    spacingVal += ` ${size4 * scale}px`;
+  }
+  return spacingVal;
+}

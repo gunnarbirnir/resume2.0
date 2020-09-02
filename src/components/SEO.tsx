@@ -5,7 +5,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { ILocale } from '../interfaces';
 import { getShortLocale } from '../utils';
 
-interface IProps {
+export interface IProps {
   title?: string;
   description?: string;
   locale: ILocale;

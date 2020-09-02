@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 
 import About from '../components/About';
-import SEO from '../components/SEO';
+import Layout from '../components/Layout';
 import { IPersonalInfo, IPageProps, IEdges } from '../interfaces';
 import { getLocale, getFirstOfLocale } from '../utils';
 
@@ -19,10 +19,9 @@ const ResumePage: React.FC<IProps> = ({ data, location }) => {
   const info = getFirstOfLocale(data.allContentfulInfo.edges, locale);
 
   return (
-    <React.Fragment>
-      <SEO locale={locale} />
+    <Layout seo={{ locale }}>
       <About info={info} locale={locale} />
-    </React.Fragment>
+    </Layout>
   );
 };
 

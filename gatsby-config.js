@@ -1,3 +1,5 @@
+const theme = require('./theme');
+
 require('dotenv').config({
   path: '.env',
 });
@@ -46,5 +48,15 @@ module.exports = {
       },
     },
     `gatsby-plugin-favicon`,
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/typography`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-jss',
+      options: { theme },
+    },
   ],
 };
