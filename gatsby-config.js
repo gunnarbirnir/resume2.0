@@ -21,14 +21,15 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Gunnar Birnir Ólafsson`,
+        short_name: `Gunnar`,
         start_url: `/`,
         background_color: `#ffffff`,
-        theme_color: `#0f4c81`,
+        theme_color: `#60aefb`,
         icon: `assets/icons/gbo.png`,
       },
     },
+    `gatsby-plugin-offline`,
     {
       resolve: `gatsby-source-contentful`,
       options: {
