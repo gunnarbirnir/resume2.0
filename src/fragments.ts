@@ -11,7 +11,7 @@ export const query = graphql`
       about
     }
     profilePicture {
-      fluid(maxWidth: 400) {
+      fluid(maxWidth: 180) {
         ...GatsbyContentfulFluid
       }
     }

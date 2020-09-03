@@ -65,8 +65,8 @@ const About: React.FC<IProps> = ({ info, locale }) => {
     <div className={classes.container}>
       <div
         className={classes.content}
-        data-sal="slide-up"
-        data-sal-duration="500"
+        /* data-sal="slide-up"
+        data-sal-duration="500" */
       >
         <Image fluid={info.profilePicture.fluid} className={classes.profile} />
         <div>
