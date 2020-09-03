@@ -38,7 +38,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     boxShadow: '0px 5px 20px -8px rgba(0,0,0,0.75)',
     [theme.mediaQueries.xsDown]: {
       marginRight: 0,
-      marginBottom: spacing(4),
+      marginBottom: spacing(2),
     },
   },
   title: {
@@ -65,8 +65,8 @@ const About: React.FC<IProps> = ({ info, locale }) => {
     <div className={classes.container}>
       <div
         className={classes.content}
-        /* data-sal="slide-up"
-        data-sal-duration="500" */
+        data-sal="slide-up"
+        data-sal-duration="500"
       >
         <Image fluid={info.profilePicture.fluid} className={classes.profile} />
         <div>

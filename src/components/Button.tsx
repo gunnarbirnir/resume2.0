@@ -3,7 +3,7 @@ import { createUseStyles } from 'react-jss';
 import cx from 'classnames';
 
 import { ITheme } from '../interfaces';
-import { spacing } from '../utils';
+import { spacing, shadeColor } from '../utils';
 
 interface IProps {
   onClick: () => void;
@@ -20,7 +20,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     outline: 0,
     borderRadius: 4,
     '&:hover': {
-      backgroundColor: theme.colors.primaryDarker,
+      backgroundColor: shadeColor(theme.colors.primary, 15),
     },
   },
   small: {
