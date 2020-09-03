@@ -58,5 +58,6 @@ module.exports = {
       resolve: 'gatsby-plugin-jss',
       options: { theme },
     },
+    `gatsby-plugin-scroll-reveal`,
   ],
 };

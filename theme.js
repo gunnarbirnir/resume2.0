@@ -7,8 +7,8 @@ const breakpoints = {
 
 module.exports = {
   colors: {
-    primary: '#20c9b5',
-    primaryDarker: '#1fad9c',
+    primary: '#1bc2ae',
+    primaryDarker: '#13b09d',
     background: '#ffffff',
     textPrimary: '#2e2e2e',
     textSecondary: '#707070',

@@ -2,6 +2,7 @@ import React from 'react';
 import { createUseStyles } from 'react-jss';
 
 import Button from './Button';
+import Image from './Image';
 import { IPersonalInfo, ILocale, ITheme } from '../interfaces';
 import { spacing } from '../utils';
 
@@ -19,7 +20,26 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     flexDirection: 'column',
   },
   content: {
-    maxWidth: 600,
+    maxWidth: 800,
+    display: 'flex',
+    flexDirection: 'row',
+    [theme.mediaQueries.xsDown]: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      textAlign: 'center',
+    },
+  },
+  profile: {
+    height: 180,
+    width: 180,
+    flexShrink: 0,
+    marginRight: spacing(4),
+    borderRadius: '50%',
+    boxShadow: '0px 5px 20px -8px rgba(0,0,0,0.75)',
+    [theme.mediaQueries.xsDown]: {
+      marginRight: 0,
+      marginBottom: spacing(4),
+    },
   },
   title: {
     marginBottom: spacing(2),
@@ -43,19 +63,31 @@ const About: React.FC<IProps> = ({ info, locale }) => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.content}>
-        <h1 className={classes.title}>{info.name}</h1>
-        <p className={classes.info}>{info.about.about}</p>
-        {['Störf', 'Verkefni', 'Viðurkenningar', 'Kunnátta', 'Meðmæli'].map(
-          renderButton
-        )}
+      <div
+        className={classes.content}
+        data-sal="slide-up"
+        data-sal-duration="500"
+      >
+        <Image fluid={info.profilePicture.fluid} className={classes.profile} />
+        <div>
+          <h1 className={classes.title}>{info.name}</h1>
+          <p className={classes.info}>{info.about.about}</p>
+          {['Störf', 'Verkefni', 'Viðurkenningar', 'Kunnátta', 'Meðmæli'].map(
+            renderButton
+          )}
+        </div>
       </div>
     </div>
   );
 
   function renderButton(text: string) {
     return (
-      <Button size="small" onClick={() => null} className={classes.button}>
+      <Button
+        key={text}
+        size="small"
+        onClick={() => null}
+        className={classes.button}
+      >
         {text}
       </Button>
     );

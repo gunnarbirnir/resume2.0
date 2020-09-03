@@ -1,3 +1,5 @@
+import { FluidObject } from 'gatsby-image';
+
 export type ILocale = 'is' | 'en-US';
 
 export type IEdges<T> = { node: T }[];
@@ -49,5 +51,8 @@ export interface IPersonalInfo extends IContentfulData {
   jobTitle: string;
   about: {
     about: string;
+  };
+  profilePicture: {
+    fluid: FluidObject;
   };
 }

@@ -10,5 +10,10 @@ export const query = graphql`
     about {
       about
     }
+    profilePicture {
+      fluid(maxWidth: 400) {
+        ...GatsbyContentfulFluid
+      }
+    }
   }
 `;
