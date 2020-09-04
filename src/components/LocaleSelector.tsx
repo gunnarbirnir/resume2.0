@@ -28,7 +28,7 @@ const LocaleSelector: React.FC<IProps> = ({ locale }) => {
 
   return (
     <div>
-      <p>
+      <p style={{ fontSize: 18 }}>
         {renderLocaleItem('IS', localeIS)}
         {' / '}
         {renderLocaleItem('EN', !localeIS)}
