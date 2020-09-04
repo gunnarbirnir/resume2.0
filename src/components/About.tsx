@@ -1,8 +1,10 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
+import Img from 'gatsby-image';
+import cx from 'classnames';
 
 import Button from './Button';
-import Image from './Image';
+import LocaleSelector from '../components/LocaleSelector';
 import { IPersonalInfo, ILocale, ITheme } from '../interfaces';
 import { spacing } from '../utils';
 import translations from '../../assets/json/translations.json';
@@ -13,12 +15,21 @@ interface IProps {
 }
 
 const useStyles = createUseStyles((theme: ITheme) => ({
-  container: {
+  flexContainer: {
     flex: 1,
     display: 'flex',
+    flexDirection: 'column',
+  },
+  padding: {
+    padding: spacing(3),
+  },
+  localeSelector: {
+    textAlign: 'right',
+    marginBottom: spacing(1),
+  },
+  contentContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'column',
   },
   content: {
     maxWidth: 800,
@@ -43,12 +54,6 @@ const useStyles = createUseStyles((theme: ITheme) => ({
       marginBottom: spacing(2),
     },
   },
-  title: {
-    marginBottom: spacing(2),
-  },
-  info: {
-    marginBottom: spacing(3),
-  },
   button: {
     marginRight: spacing(1),
     marginBottom: spacing(1),
@@ -62,26 +67,29 @@ const About: React.FC<IProps> = ({ info, locale }) => {
     return null;
   }
 
-  console.log(locale);
-
   return (
-    <div className={classes.container}>
-      <div
-        className={classes.content}
-        data-sal="slide-up"
-        data-sal-duration="500"
-      >
-        <Image fluid={info.profilePicture.fluid} className={classes.profile} />
-        <div>
-          <h1 className={classes.title}>{info.name}</h1>
-          <p className={classes.info}>{info.about.about}</p>
-          {[
-            translations.work[locale],
-            translations.projects[locale],
-            translations.awards[locale],
-            translations.skills[locale],
-            translations.recommendation[locale],
-          ].map(renderButton)}
+    <div className={cx(classes.flexContainer, classes.padding)}>
+      <div className={classes.localeSelector}>
+        <LocaleSelector locale={locale} />
+      </div>
+      <div className={cx(classes.contentContainer, classes.flexContainer)}>
+        <div
+          className={classes.content}
+          data-sal="slide-up"
+          data-sal-duration="500"
+        >
+          <Img fluid={info.profilePicture.fluid} className={classes.profile} />
+          <div>
+            <h1 style={{ marginBottom: spacing(2) }}>{info.name}</h1>
+            <p style={{ marginBottom: spacing(3) }}>{info.about.about}</p>
+            {[
+              translations.work[locale],
+              translations.projects[locale],
+              translations.skills[locale],
+              translations.accolades[locale],
+              translations.references[locale],
+            ].map(renderButton)}
+          </div>
         </div>
       </div>
     </div>

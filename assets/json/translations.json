@@ -7,16 +7,16 @@
     "is": "Verkefni",
     "en-US": "Projects"
   },
-  "awards": {
+  "accolades": {
     "is": "Viðurkenningar",
-    "en-US": "Awards"
+    "en-US": "Accolades"
   },
   "skills": {
     "is": "Kunnátta",
     "en-US": "Skills"
   },
-  "recommendation": {
+  "references": {
     "is": "Meðmæli",
-    "en-US": "Recommendation"
+    "en-US": "References"
   }
 }

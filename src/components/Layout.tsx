@@ -1,5 +1,6 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
+import cx from 'classnames';
 
 import SEO, { IProps as SEOProps } from './SEO';
 import { spacing } from '../utils';
@@ -8,6 +9,7 @@ import { ILocale } from '../interfaces';
 interface IProps {
   locale: ILocale;
   seo?: Partial<SEOProps>;
+  padding?: boolean;
 }
 
 const useStyles = createUseStyles({
@@ -23,16 +25,23 @@ const useStyles = createUseStyles({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    padding: spacing(3),
     minHeight: '100vh',
+  },
+  padding: {
+    padding: spacing(3),
   },
 });
 
-const Layout: React.FC<IProps> = ({ children, locale, seo }) => {
+const Layout: React.FC<IProps> = ({
+  children,
+  locale,
+  seo,
+  padding = true,
+}) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.container}>
+    <div className={cx(classes.container, { [classes.padding]: padding })}>
       <SEO locale={locale} {...seo} />
       {children}
     </div>
