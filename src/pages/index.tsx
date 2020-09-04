@@ -3,8 +3,10 @@ import { graphql } from 'gatsby';
 
 import About from '../components/About';
 import Layout from '../components/Layout';
+import LocaleSelector from '../components/LocaleSelector';
+
 import { IPersonalInfo, IPageProps, IEdges } from '../interfaces';
-import { getLocale, getFirstOfLocale } from '../utils';
+import { getLocale, getFirstOfLocale, spacing } from '../utils';
 
 interface IProps extends IPageProps {
   data: {
@@ -19,7 +21,10 @@ const ResumePage: React.FC<IProps> = ({ data, location }) => {
   const info = getFirstOfLocale(data.allContentfulInfo.edges, locale);
 
   return (
-    <Layout seo={{ locale }}>
+    <Layout locale={locale}>
+      <div style={{ textAlign: 'right', marginBottom: spacing(1) }}>
+        <LocaleSelector locale={locale} />
+      </div>
       <About info={info} locale={locale} />
     </Layout>
   );

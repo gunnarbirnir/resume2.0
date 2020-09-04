@@ -3,9 +3,11 @@ import { createUseStyles } from 'react-jss';
 
 import SEO, { IProps as SEOProps } from './SEO';
 import { spacing } from '../utils';
+import { ILocale } from '../interfaces';
 
 interface IProps {
-  seo: SEOProps;
+  locale: ILocale;
+  seo?: Partial<SEOProps>;
 }
 
 const useStyles = createUseStyles({
@@ -21,17 +23,17 @@ const useStyles = createUseStyles({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    margin: spacing(3),
-    minHeight: `calc(100vh - ${spacing(6)})`,
+    padding: spacing(3),
+    minHeight: '100vh',
   },
 });
 
-const Layout: React.FC<IProps> = ({ children, seo }) => {
+const Layout: React.FC<IProps> = ({ children, locale, seo }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.container}>
-      <SEO {...seo} />
+      <SEO locale={locale} {...seo} />
       {children}
     </div>
   );

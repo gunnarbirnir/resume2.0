@@ -5,6 +5,7 @@ import Button from './Button';
 import Image from './Image';
 import { IPersonalInfo, ILocale, ITheme } from '../interfaces';
 import { spacing } from '../utils';
+import translations from '../../assets/json/translations.json';
 
 interface IProps {
   info: IPersonalInfo | null;
@@ -23,6 +24,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     maxWidth: 800,
     display: 'flex',
     flexDirection: 'row',
+    paddingBottom: 50,
     [theme.mediaQueries.xsDown]: {
       flexDirection: 'column',
       alignItems: 'center',
@@ -55,11 +57,12 @@ const useStyles = createUseStyles((theme: ITheme) => ({
 
 const About: React.FC<IProps> = ({ info, locale }) => {
   const classes = useStyles();
-  const localeIS = locale === 'is';
 
   if (!info) {
     return null;
   }
+
+  console.log(locale);
 
   return (
     <div className={classes.container}>
@@ -72,9 +75,13 @@ const About: React.FC<IProps> = ({ info, locale }) => {
         <div>
           <h1 className={classes.title}>{info.name}</h1>
           <p className={classes.info}>{info.about.about}</p>
-          {['Störf', 'Verkefni', 'Viðurkenningar', 'Kunnátta', 'Meðmæli'].map(
-            renderButton
-          )}
+          {[
+            translations.work[locale],
+            translations.projects[locale],
+            translations.awards[locale],
+            translations.skills[locale],
+            translations.recommendation[locale],
+          ].map(renderButton)}
         </div>
       </div>
     </div>

@@ -1,0 +1,22 @@
+{
+  "work": {
+    "is": "Störf",
+    "en-US": "Work"
+  },
+  "projects": {
+    "is": "Verkefni",
+    "en-US": "Projects"
+  },
+  "awards": {
+    "is": "Viðurkenningar",
+    "en-US": "Awards"
+  },
+  "skills": {
+    "is": "Kunnátta",
+    "en-US": "Skills"
+  },
+  "recommendation": {
+    "is": "Meðmæli",
+    "en-US": "Recommendation"
+  }
+}
