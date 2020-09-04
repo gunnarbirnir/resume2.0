@@ -26,5 +26,6 @@ module.exports = {
   },
   dimensions: {
     contentWidth: 1200,
+    borderRadius: 4,
   },
 };

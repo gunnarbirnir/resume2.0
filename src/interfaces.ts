@@ -31,6 +31,7 @@ export interface ITheme {
   };
   dimensions: {
     contentWidth: number;
+    borderRadius: number;
   };
 }
 
