@@ -9,8 +9,8 @@ function useObjectSize(myRef: React.MutableRefObject<any>) {
   useEffect(() => {
     function handleResize() {
       setObjectSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: myRef.current.offsetWidth,
+        height: myRef.current.offsetHeight,
       });
     }
 
