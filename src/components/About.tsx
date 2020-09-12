@@ -2,8 +2,12 @@ import React, { useRef } from 'react';
 import { createUseStyles } from 'react-jss';
 import Img from 'gatsby-image';
 import cx from 'classnames';
+import { IconType } from 'react-icons';
+import { IoMdMail, IoLogoFacebook } from 'react-icons/io';
+import { FaPhone } from 'react-icons/fa';
 
 import Button from './Button';
+import FlexContainer from './FlexContainer';
 import LocaleSelector from '../components/LocaleSelector';
 import ImageBlur from '../components/ImageBlur';
 import { IPersonalInfo, ILocale, ITheme } from '../interfaces';
@@ -78,6 +82,24 @@ const useStyles = createUseStyles((theme: ITheme) => ({
       marginBottom: spacing(2),
     },
   },
+  contactInfo: {
+    [theme.mediaQueries.xsDown]: {
+      justifyContent: 'center',
+    },
+  },
+  contactItem: {
+    marginRight: spacing(2),
+    marginBottom: spacing(1),
+    whiteSpace: 'nowrap',
+  },
+  contactLink: {
+    color: theme.colors.textSecondary,
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+      color: theme.colors.primary,
+    },
+  },
   button: {
     marginRight: spacing(1),
     marginBottom: spacing(1),
@@ -111,6 +133,7 @@ const About: React.FC<IProps> = ({ info, locale }) => {
           positions={[{ width: '100%', height: '100%' }]}
         />
       </div>
+
       <div
         ref={contentRef}
         style={{ zIndex: 1 }}
@@ -133,7 +156,38 @@ const About: React.FC<IProps> = ({ info, locale }) => {
             />
             <div>
               <h1 style={{ marginBottom: spacing(2) }}>{info.name}</h1>
-              <p style={{ marginBottom: spacing(3) }}>{info.about.about}</p>
+              <FlexContainer
+                direction="row"
+                wrap="wrap"
+                className={classes.contactInfo}
+                style={{ marginBottom: spacing(2) }}
+              >
+                <ContactInfo
+                  text={info.email}
+                  link={`mailto:${info.email}`}
+                  Icon={IoMdMail}
+                />
+                <ContactInfo
+                  text={info.phoneNumber}
+                  link={`tel:${info.phoneNumber}`}
+                  Icon={FaPhone}
+                  iconSize={15}
+                />
+                <ContactInfo
+                  newTab
+                  text={info.facebook}
+                  link={`https://www.facebook.com/${info.facebook}`}
+                  Icon={IoLogoFacebook}
+                />
+              </FlexContainer>
+              <p
+                style={{
+                  marginBottom: spacing(3),
+                  color: theme.colors.textLight,
+                }}
+              >
+                {info.about.about}
+              </p>
               {[
                 translations.work[locale],
                 translations.projects[locale],
@@ -158,6 +212,38 @@ const About: React.FC<IProps> = ({ info, locale }) => {
       >
         {text}
       </Button>
+    );
+  }
+
+  function ContactInfo(contactProps: {
+    text: string;
+    link: string;
+    newTab?: boolean;
+    Icon: IconType;
+    iconSize?: number;
+  }) {
+    const { text, link, newTab = false, Icon, iconSize = 20 } = contactProps;
+
+    return (
+      <FlexContainer
+        direction="row"
+        alignItems="center"
+        className={classes.contactItem}
+      >
+        <Icon
+          size={iconSize}
+          color={theme.colors.primary}
+          style={{ marginRight: spacing(1) }}
+        />
+        <a
+          href={link}
+          target={newTab ? '_blank' : undefined}
+          rel={newTab ? 'noopener noreferrer' : undefined}
+          className={classes.contactLink}
+        >
+          {text}
+        </a>
+      </FlexContainer>
     );
   }
 

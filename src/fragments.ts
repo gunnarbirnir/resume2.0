@@ -7,6 +7,8 @@ export const query = graphql`
     name
     email
     jobTitle
+    phoneNumber
+    facebook
     about {
       about
     }

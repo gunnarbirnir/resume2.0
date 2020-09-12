@@ -11,6 +11,7 @@ export interface ITheme {
     background: string;
     textPrimary: string;
     textSecondary: string;
+    textLight: string;
     white: string;
   };
   breakpoints: {
@@ -50,6 +51,8 @@ export interface IPersonalInfo extends IContentfulData {
   name: string;
   email: string;
   jobTitle: string;
+  phoneNumber: string;
+  facebook: string;
   about: {
     about: string;
   };
