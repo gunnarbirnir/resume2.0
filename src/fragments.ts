@@ -15,5 +15,10 @@ export const query = graphql`
         ...GatsbyContentfulFluid
       }
     }
+    backgroundImage {
+      fluid {
+        ...GatsbyContentfulFluid
+      }
+    }
   }
 `;

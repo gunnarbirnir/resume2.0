@@ -56,4 +56,7 @@ export interface IPersonalInfo extends IContentfulData {
   profilePicture: {
     fluid: FluidObject;
   };
+  backgroundImage: {
+    fluid: FluidObject;
+  };
 }

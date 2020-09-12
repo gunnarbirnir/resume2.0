@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { createUseStyles } from 'react-jss';
 import Img from 'gatsby-image';
 import cx from 'classnames';
 
 import Button from './Button';
 import LocaleSelector from '../components/LocaleSelector';
+import ImageBlur from '../components/ImageBlur';
 import { IPersonalInfo, ILocale, ITheme } from '../interfaces';
 import { spacing } from '../utils';
+import useWindowSize from '../hooks/useWindowSize';
+import useTheme from '../hooks/useTheme';
+import useObjectSize from '../hooks/useObjectSize';
 import translations from '../../assets/json/translations.json';
 
 interface IProps {
@@ -21,18 +25,7 @@ const SIDE_PADDING = 32;
 const useStyles = createUseStyles((theme: ITheme) => ({
   sideBackground: {
     zIndex: 0,
-    backgroundColor: theme.colors.primary,
-    opacity: 0.25,
     position: 'absolute',
-    height: '100%',
-    width: `calc((100vw - ${CONTENT_WIDTH}px)/2 + ${PROFILE_PIC_SIZE / 2}px)`,
-    [`@media (max-width: ${CONTENT_WIDTH + SIDE_PADDING * 2}px)`]: {
-      width: `calc(${SIDE_PADDING}px + ${PROFILE_PIC_SIZE / 2}px)`,
-    } as any,
-    [theme.mediaQueries.xsDown]: {
-      height: 200,
-      width: '100%',
-    } as any,
   },
   flexContainer: {
     flex: 1,
@@ -66,7 +59,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     maxWidth: CONTENT_WIDTH,
     display: 'flex',
     flexDirection: 'row',
-    paddingBottom: 50,
+    paddingBottom: 35,
     [theme.mediaQueries.xsDown]: {
       flexDirection: 'column',
       alignItems: 'center',
@@ -93,6 +86,13 @@ const useStyles = createUseStyles((theme: ITheme) => ({
 
 const About: React.FC<IProps> = ({ info, locale }) => {
   const classes = useStyles();
+  const theme = useTheme();
+  const windowSize = useWindowSize();
+  const contentRef = useRef(null);
+  const contentSize = useObjectSize(contentRef);
+
+  const backgroundHeight = getBackgroundHeight();
+  const backgroundWidth = getBackgroundWidth();
 
   if (!info) {
     return null;
@@ -100,8 +100,19 @@ const About: React.FC<IProps> = ({ info, locale }) => {
 
   return (
     <React.Fragment>
-      <div className={classes.sideBackground} />
       <div
+        className={classes.sideBackground}
+        style={{ height: backgroundHeight, width: backgroundWidth }}
+      >
+        <ImageBlur
+          src={info.backgroundImage.fluid.src}
+          containerHeight={`${backgroundHeight}px`}
+          containerWidth={`${backgroundWidth}px`}
+          positions={[{ width: '100%', height: '100%' }]}
+        />
+      </div>
+      <div
+        ref={contentRef}
         style={{ zIndex: 1 }}
         className={cx(classes.flexContainer, classes.padding)}
       >
@@ -148,6 +159,22 @@ const About: React.FC<IProps> = ({ info, locale }) => {
         {text}
       </Button>
     );
+  }
+
+  function getBackgroundHeight() {
+    return windowSize.width > theme.breakpoints.xs
+      ? Math.max(windowSize.height, contentSize.height)
+      : 200;
+  }
+
+  function getBackgroundWidth() {
+    if (windowSize.width <= theme.breakpoints.xs) {
+      return windowSize.width;
+    }
+    if (windowSize.width <= CONTENT_WIDTH + SIDE_PADDING * 2) {
+      return SIDE_PADDING + PROFILE_PIC_SIZE / 2;
+    }
+    return (windowSize.width - CONTENT_WIDTH) / 2 + PROFILE_PIC_SIZE / 2;
   }
 };
 
