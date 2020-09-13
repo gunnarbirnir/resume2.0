@@ -181,14 +181,7 @@ const About: React.FC<IProps> = ({ info, locale, pageSections }) => {
                   Icon={IoLogoFacebook}
                 />
               </FlexContainer>
-              <p
-                style={{
-                  marginBottom: spacing(3),
-                  color: theme.colors.textLight,
-                }}
-              >
-                {info.about.about}
-              </p>
+              <p style={{ marginBottom: spacing(3) }}>{info.about.about}</p>
               {pageSections.map(renderButton)}
             </div>
           </div>

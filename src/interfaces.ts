@@ -11,7 +11,6 @@ export interface ITheme {
     background: string;
     textPrimary: string;
     textSecondary: string;
-    textLight: string;
     white: string;
   };
   breakpoints: {

@@ -11,7 +11,6 @@ module.exports = {
     background: '#ffffff',
     textPrimary: '#2e2e2e',
     textSecondary: '#707070',
-    textLight: '#868686',
     white: '#ffffff',
   },
   breakpoints,
