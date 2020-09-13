@@ -10,7 +10,7 @@ import Button from './Button';
 import FlexContainer from './FlexContainer';
 import LocaleSelector from '../components/LocaleSelector';
 import ImageBlur from '../components/ImageBlur';
-import { IPersonalInfo, ILocale, ITheme } from '../interfaces';
+import { IPersonalInfo, ILocale, ITheme, IPageSection } from '../interfaces';
 import { spacing } from '../utils';
 import useWindowSize from '../hooks/useWindowSize';
 import useTheme from '../hooks/useTheme';
@@ -20,6 +20,7 @@ import translations from '../../assets/json/translations.json';
 interface IProps {
   info: IPersonalInfo | null;
   locale: ILocale;
+  pageSections: IPageSection[];
 }
 
 const PROFILE_PIC_SIZE = 180;
@@ -106,7 +107,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   },
 }));
 
-const About: React.FC<IProps> = ({ info, locale }) => {
+const About: React.FC<IProps> = ({ info, locale, pageSections }) => {
   const classes = useStyles();
   const theme = useTheme();
   const windowSize = useWindowSize();
@@ -188,13 +189,7 @@ const About: React.FC<IProps> = ({ info, locale }) => {
               >
                 {info.about.about}
               </p>
-              {[
-                translations.work[locale],
-                translations.projects[locale],
-                translations.skills[locale],
-                translations.accolades[locale],
-                translations.references[locale],
-              ].map(renderButton)}
+              {pageSections.map(renderButton)}
             </div>
           </div>
         </div>
@@ -202,15 +197,15 @@ const About: React.FC<IProps> = ({ info, locale }) => {
     </React.Fragment>
   );
 
-  function renderButton(text: string) {
+  function renderButton(section: IPageSection) {
     return (
       <Button
-        key={text}
+        key={section.id}
         size="small"
         onClick={() => null}
         className={classes.button}
       >
-        {text}
+        {section.title}
       </Button>
     );
   }

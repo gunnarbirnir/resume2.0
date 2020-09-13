@@ -23,4 +23,18 @@ export const query = graphql`
       }
     }
   }
+
+  fragment PageSection on ContentfulPageSection {
+    id
+    node_locale
+    title
+  }
+
+  fragment PageLayout on ContentfulPageLayout {
+    id
+    node_locale
+    sections {
+      ...PageSection
+    }
+  }
 `;

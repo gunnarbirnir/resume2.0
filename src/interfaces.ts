@@ -63,3 +63,11 @@ export interface IPersonalInfo extends IContentfulData {
     fluid: FluidObject;
   };
 }
+
+export interface IPageLayout extends IContentfulData {
+  sections: IPageSection[];
+}
+
+export interface IPageSection extends IContentfulData {
+  title: string;
+}
