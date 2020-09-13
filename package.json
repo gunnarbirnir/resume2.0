@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "dependencies": {
+    "@types/smoothscroll-polyfill": "^0.3.1",
     "classnames": "^2.2.6",
     "dotenv": "^8.2.0",
     "gatsby": "^2.24.50",
@@ -26,6 +27,7 @@
     "react-icons": "^3.11.0",
     "react-jss": "^10.4.0",
     "react-typography": "^0.16.19",
+    "smoothscroll-polyfill": "^0.4.4",
     "typography": "^0.16.19"
   },
   "devDependencies": {

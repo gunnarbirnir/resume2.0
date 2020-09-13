@@ -1,6 +1,7 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
 import cx from 'classnames';
+import smoothscroll from 'smoothscroll-polyfill';
 
 import SEO, { IProps as SEOProps } from './SEO';
 import { spacing } from '../utils';
@@ -11,6 +12,8 @@ interface IProps {
   seo?: Partial<SEOProps>;
   padding?: boolean;
 }
+
+smoothscroll.polyfill();
 
 const useStyles = createUseStyles({
   '@global': {

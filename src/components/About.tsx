@@ -5,6 +5,7 @@ import cx from 'classnames';
 import { IconType } from 'react-icons';
 import { IoMdMail, IoLogoFacebook } from 'react-icons/io';
 import { FaPhone } from 'react-icons/fa';
+import { RiArrowDownSLine } from 'react-icons/ri';
 
 import Button from './Button';
 import FlexContainer from './FlexContainer';
@@ -45,6 +46,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     zIndex: 1,
     minHeight: '100vh',
     padding: `${spacing(3)} ${SIDE_PADDING}px`,
+    position: 'relative',
   },
   localeContainer: {
     display: 'flex',
@@ -89,6 +91,29 @@ const useStyles = createUseStyles((theme: ITheme) => ({
       marginBottom: spacing(2),
     },
   },
+  arrowContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  '@keyframes bounce': {
+    '2%': { transform: 'translateY(0px)' },
+    '4%': { transform: 'translateY(-15px)' },
+    '6%': { transform: 'translateY(0px)' },
+    '8%': { transform: 'translateY(-10px)' },
+    '10%': { transform: 'translateY(0px)' },
+  },
+  arrow: {
+    animationName: '$bounce',
+    animationDuration: '5s',
+    animationDelay: '1s',
+    animationIterationCount: 4,
+    cursor: 'pointer',
+    '&:hover': {
+      opacity: 0.8,
+    },
+  },
   contactInfo: {
     [theme.mediaQueries.xsDown]: {
       justifyContent: 'center',
@@ -122,6 +147,7 @@ const About: React.FC<IProps> = ({ info, locale, pageSections }) => {
 
   const backgroundHeight = getBackgroundHeight();
   const backgroundWidth = getBackgroundWidth();
+  const displayArrow = contentSize.height <= windowSize.height;
 
   if (!info) {
     return null;
@@ -191,6 +217,22 @@ const About: React.FC<IProps> = ({ info, locale, pageSections }) => {
             </div>
           </div>
         </div>
+
+        {displayArrow && (
+          <FlexContainer
+            justifyContent="center"
+            className={classes.arrowContainer}
+          >
+            <RiArrowDownSLine
+              size={50}
+              color={theme.colors.textSecondary}
+              className={classes.arrow}
+              onClick={() =>
+                pageSections.length && scrollToRef(pageSections[0].ref)
+              }
+            />
+          </FlexContainer>
+        )}
       </div>
     </React.Fragment>
   );
