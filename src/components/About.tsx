@@ -197,19 +197,6 @@ const About: React.FC<IProps> = ({ info, locale, pageSections }) => {
     </React.Fragment>
   );
 
-  function renderButton(section: IPageSection) {
-    return (
-      <Button
-        key={section.id}
-        size="small"
-        onClick={() => null}
-        className={classes.button}
-      >
-        {section.title}
-      </Button>
-    );
-  }
-
   function ContactInfo(contactProps: {
     text: string;
     link: string;
@@ -239,6 +226,19 @@ const About: React.FC<IProps> = ({ info, locale, pageSections }) => {
           {text}
         </a>
       </FlexContainer>
+    );
+  }
+
+  function renderButton(section: IPageSection) {
+    return (
+      <Button
+        key={section.id}
+        size="small"
+        onClick={() => null}
+        className={classes.button}
+      >
+        {section.title}
+      </Button>
     );
   }
 
