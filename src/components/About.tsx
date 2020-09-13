@@ -10,17 +10,21 @@ import Button from './Button';
 import FlexContainer from './FlexContainer';
 import LocaleSelector from '../components/LocaleSelector';
 import ImageBlur from '../components/ImageBlur';
-import { IPersonalInfo, ILocale, ITheme, IPageSection } from '../interfaces';
-import { spacing } from '../utils';
+import {
+  IPersonalInfo,
+  ILocale,
+  ITheme,
+  IPageSectionWithRef,
+} from '../interfaces';
+import { spacing, scrollToRef } from '../utils';
 import useWindowSize from '../hooks/useWindowSize';
 import useTheme from '../hooks/useTheme';
 import useObjectSize from '../hooks/useObjectSize';
-import translations from '../../assets/json/translations.json';
 
 interface IProps {
   info: IPersonalInfo | null;
   locale: ILocale;
-  pageSections: IPageSection[];
+  pageSections: IPageSectionWithRef[];
 }
 
 const PROFILE_PIC_SIZE = 180;
@@ -37,7 +41,9 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
-  padding: {
+  container: {
+    zIndex: 1,
+    minHeight: '100vh',
     padding: `${spacing(3)} ${SIDE_PADDING}px`,
   },
   localeContainer: {
@@ -137,8 +143,7 @@ const About: React.FC<IProps> = ({ info, locale, pageSections }) => {
 
       <div
         ref={contentRef}
-        style={{ zIndex: 1 }}
-        className={cx(classes.flexContainer, classes.padding)}
+        className={cx(classes.flexContainer, classes.container)}
       >
         <div className={classes.localeContainer}>
           <div className={classes.localeSelector}>
@@ -222,13 +227,13 @@ const About: React.FC<IProps> = ({ info, locale, pageSections }) => {
     );
   }
 
-  function renderButton(section: IPageSection) {
+  function renderButton(section: IPageSectionWithRef) {
     return (
       <Button
         key={section.id}
         size="small"
-        onClick={() => null}
         className={classes.button}
+        onClick={() => scrollToRef(section.ref)}
       >
         {section.title}
       </Button>

@@ -28,6 +28,7 @@ export const query = graphql`
     id
     node_locale
     title
+    component
   }
 
   fragment PageLayout on ContentfulPageLayout {

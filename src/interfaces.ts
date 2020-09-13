@@ -8,10 +8,10 @@ export interface ITheme {
   colors: {
     primary: string;
     primaryDarker: string;
-    background: string;
     textPrimary: string;
     textSecondary: string;
     white: string;
+    backgroundGray: string;
   };
   breakpoints: {
     xs: number;
@@ -67,6 +67,18 @@ export interface IPageLayout extends IContentfulData {
   sections: IPageSection[];
 }
 
+export type ISectionComponent =
+  | 'work'
+  | 'projects'
+  | 'skills'
+  | 'accolades'
+  | 'references';
+
 export interface IPageSection extends IContentfulData {
   title: string;
+  component: ISectionComponent;
+}
+
+export interface IPageSectionWithRef extends IPageSection {
+  ref: React.RefObject<any>;
 }

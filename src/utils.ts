@@ -61,3 +61,10 @@ export function shadeColor(color: string, percent: number) {
 
   return '#' + RR + GG + BB;
 }
+
+export function scrollToRef(ref: React.RefObject<any>) {
+  window.scrollTo({
+    top: ref.current.offsetTop,
+    behavior: 'smooth',
+  });
+}

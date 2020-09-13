@@ -8,10 +8,10 @@ const breakpoints = {
 module.exports = {
   colors: {
     primary: '#0cad9a',
-    background: '#ffffff',
     textPrimary: '#2e2e2e',
     textSecondary: '#707070',
     white: '#ffffff',
+    backgroundGray: '#fafafa',
   },
   breakpoints,
   mediaQueries: {

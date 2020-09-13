@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function useObjectSize(myRef: React.MutableRefObject<any>) {
+function useObjectSize(myRef: React.RefObject<any>) {
   const [objectSize, setObjectSize] = useState<{
     width: number;
     height: number;
