@@ -59,5 +59,6 @@ module.exports = {
       options: { theme },
     },
     `gatsby-plugin-scroll-reveal`,
+    `gatsby-plugin-smoothscroll`,
   ],
 };

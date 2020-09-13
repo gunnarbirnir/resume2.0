@@ -63,10 +63,6 @@ export interface IPersonalInfo extends IContentfulData {
   };
 }
 
-export interface IPageLayout extends IContentfulData {
-  sections: IPageSection[];
-}
-
 export type ISectionComponent =
   | 'work'
   | 'projects'
@@ -79,6 +75,10 @@ export interface IPageSection extends IContentfulData {
   component: ISectionComponent;
 }
 
-export interface IPageSectionWithRef extends IPageSection {
-  ref: React.RefObject<any>;
+export interface IScrollSection extends IPageSection {
+  scrollId: string;
+}
+
+export interface IPageLayout extends IContentfulData {
+  sections: IPageSection[];
 }

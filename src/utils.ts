@@ -1,3 +1,5 @@
+import smoothScroll from 'gatsby-plugin-smoothscroll';
+
 import { ILocale, IEdges, IContentfulData } from './interfaces';
 
 export function getLocale(pathname: string): ILocale {
@@ -62,9 +64,6 @@ export function shadeColor(color: string, percent: number) {
   return '#' + RR + GG + BB;
 }
 
-export function scrollToRef(ref: React.RefObject<any>) {
-  window.scrollTo({
-    top: ref.current.offsetTop,
-    behavior: 'smooth',
-  });
+export function scrollTo(id: string) {
+  smoothScroll(`#${id}`);
 }

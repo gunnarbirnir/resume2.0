@@ -32,7 +32,7 @@ const ResumePage: React.FC<IProps> = ({ data, location }) => {
   const pageSections = pageLayout
     ? pageLayout.sections.map((section) => ({
         ...section,
-        ref: createRef(),
+        scrollId: `${section.component}-${section.id}`,
       }))
     : [];
 
@@ -47,45 +47,15 @@ const ResumePage: React.FC<IProps> = ({ data, location }) => {
     return pageSections.map((section) => {
       switch (section.component) {
         case 'work':
-          return (
-            <WorkSection
-              title={section.title}
-              ref={section.ref}
-              key={section.id}
-            />
-          );
+          return <WorkSection key={section.id} section={section} />;
         case 'projects':
-          return (
-            <ProjectsSection
-              title={section.title}
-              ref={section.ref}
-              key={section.id}
-            />
-          );
+          return <ProjectsSection key={section.id} section={section} />;
         case 'skills':
-          return (
-            <SkillsSection
-              title={section.title}
-              ref={section.ref}
-              key={section.id}
-            />
-          );
+          return <SkillsSection key={section.id} section={section} />;
         case 'accolades':
-          return (
-            <AccoladesSection
-              title={section.title}
-              ref={section.ref}
-              key={section.id}
-            />
-          );
+          return <AccoladesSection key={section.id} section={section} />;
         case 'references':
-          return (
-            <ReferencesSection
-              title={section.title}
-              ref={section.ref}
-              key={section.id}
-            />
-          );
+          return <ReferencesSection key={section.id} section={section} />;
       }
     });
   }

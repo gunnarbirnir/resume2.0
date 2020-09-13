@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import Img from 'gatsby-image';
 import cx from 'classnames';
@@ -11,13 +11,8 @@ import Button from './Button';
 import FlexContainer from './FlexContainer';
 import LocaleSelector from '../components/LocaleSelector';
 import ImageBlur from '../components/ImageBlur';
-import {
-  IPersonalInfo,
-  ILocale,
-  ITheme,
-  IPageSectionWithRef,
-} from '../interfaces';
-import { spacing, scrollToRef } from '../utils';
+import { IPersonalInfo, ILocale, ITheme, IScrollSection } from '../interfaces';
+import { spacing, scrollTo } from '../utils';
 import useWindowSize from '../hooks/useWindowSize';
 import useTheme from '../hooks/useTheme';
 import useObjectSize from '../hooks/useObjectSize';
@@ -25,7 +20,7 @@ import useObjectSize from '../hooks/useObjectSize';
 interface IProps {
   info: IPersonalInfo | null;
   locale: ILocale;
-  pageSections: IPageSectionWithRef[];
+  pageSections: IScrollSection[];
 }
 
 const PROFILE_PIC_SIZE = 180;
@@ -105,14 +100,16 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     '10%': { transform: 'translateY(0px)' },
   },
   arrow: {
-    animationName: '$bounce',
-    animationDuration: '5s',
-    animationDelay: '1s',
-    animationIterationCount: 4,
     cursor: 'pointer',
     '&:hover': {
       opacity: 0.8,
     },
+  },
+  arrowAnimation: {
+    animationName: '$bounce',
+    animationDuration: '5s',
+    animationDelay: '1s',
+    animationIterationCount: 4,
   },
   contactInfo: {
     [theme.mediaQueries.xsDown]: {
@@ -144,6 +141,7 @@ const About: React.FC<IProps> = ({ info, locale, pageSections }) => {
   const windowSize = useWindowSize();
   const contentRef = useRef(null);
   const contentSize = useObjectSize(contentRef);
+  const [disableArrowAnimation, setDisableArrowAnimation] = useState(false);
 
   const backgroundHeight = getBackgroundHeight();
   const backgroundWidth = getBackgroundWidth();
@@ -226,10 +224,10 @@ const About: React.FC<IProps> = ({ info, locale, pageSections }) => {
             <RiArrowDownSLine
               size={50}
               color={theme.colors.textSecondary}
-              className={classes.arrow}
-              onClick={() =>
-                pageSections.length && scrollToRef(pageSections[0].ref)
-              }
+              className={cx(classes.arrow, {
+                [classes.arrowAnimation]: !disableArrowAnimation,
+              })}
+              onClick={onArrowClick}
             />
           </FlexContainer>
         )}
@@ -269,17 +267,24 @@ const About: React.FC<IProps> = ({ info, locale, pageSections }) => {
     );
   }
 
-  function renderButton(section: IPageSectionWithRef) {
+  function renderButton(section: IScrollSection) {
     return (
       <Button
         key={section.id}
         size="small"
         className={classes.button}
-        onClick={() => scrollToRef(section.ref)}
+        onClick={() => scrollTo(section.scrollId)}
       >
         {section.title}
       </Button>
     );
+  }
+
+  function onArrowClick() {
+    if (pageSections.length) {
+      scrollTo(pageSections[0].scrollId);
+      setDisableArrowAnimation(true);
+    }
   }
 
   function getBackgroundHeight() {

@@ -1,13 +1,14 @@
 import React from 'react';
 
 import Section from './Section';
+import { IScrollSection } from '../interfaces';
 
 interface IProps {
-  title: string;
+  section: IScrollSection;
 }
 
-const ProjectsSection = React.forwardRef(({ title }: IProps, ref) => {
-  return <Section title={title} ref={ref} />;
-});
+const ProjectsSection: React.FC<IProps> = ({ section }) => {
+  return <Section section={section} />;
+};
 
 export default ProjectsSection;

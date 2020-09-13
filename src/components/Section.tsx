@@ -1,14 +1,13 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
 
-import { ITheme } from '../interfaces';
+import { ITheme, IScrollSection } from '../interfaces';
 import { spacing } from '../utils';
 import useTheme from '../hooks/useTheme';
 
 interface IProps {
-  title: string;
+  section: IScrollSection;
   background?: 'white' | 'gray';
-  children?: React.ReactChildren;
 }
 
 const useStyles = createUseStyles((theme: ITheme) => ({
@@ -25,29 +24,31 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   },
 }));
 
-const Section = React.forwardRef(
-  ({ title, background = 'white', children }: IProps, ref) => {
-    const classes = useStyles();
-    const theme = useTheme();
+const Section: React.FC<IProps> = ({
+  section,
+  background = 'white',
+  children,
+}) => {
+  const classes = useStyles();
+  const theme = useTheme();
 
-    return (
-      <div
-        ref={ref}
-        className={classes.container}
-        style={{
-          backgroundColor:
-            background === 'white'
-              ? theme.colors.white
-              : theme.colors.backgroundGray,
-        }}
-      >
-        <div className={classes.content}>
-          <h2 className={classes.title}>{title}</h2>
-          {children}
-        </div>
+  return (
+    <div
+      id={section.scrollId}
+      className={classes.container}
+      style={{
+        backgroundColor:
+          background === 'white'
+            ? theme.colors.white
+            : theme.colors.backgroundGray,
+      }}
+    >
+      <div className={classes.content}>
+        <h2 className={classes.title}>{section.title}</h2>
+        {children}
       </div>
-    );
-  }
-);
+    </div>
+  );
+};
 
 export default Section;
