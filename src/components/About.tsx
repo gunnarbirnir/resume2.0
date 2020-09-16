@@ -102,7 +102,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   arrow: {
     cursor: 'pointer',
     '&:hover': {
-      opacity: 0.8,
+      opacity: theme.effects.hoverOpacity,
     },
   },
   arrowAnimation: {
@@ -223,7 +223,7 @@ const About: React.FC<IProps> = ({ info, locale, pageSections }) => {
           >
             <RiArrowDownSLine
               size={50}
-              color={theme.colors.textSecondary}
+              color={theme.colors.mediumGray}
               className={cx(classes.arrow, {
                 [classes.arrowAnimation]: !disableArrowAnimation,
               })}

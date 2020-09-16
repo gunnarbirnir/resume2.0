@@ -1,3 +1,5 @@
+const darkGray = '#2e2e2e';
+const mediumGray = '#696969';
 const breakpoints = {
   xs: 600,
   sm: 960,
@@ -7,10 +9,12 @@ const breakpoints = {
 
 module.exports = {
   colors: {
-    primary: '#007491',
-    textPrimary: '#2e2e2e',
-    textSecondary: '#696969',
+    primary: '#006a91',
+    textPrimary: darkGray,
+    textSecondary: mediumGray,
     white: '#ffffff',
+    darkGray,
+    mediumGray,
     backgroundGray: '#fafafa',
   },
   breakpoints,
@@ -27,5 +31,9 @@ module.exports = {
   dimensions: {
     contentWidth: 1200,
     borderRadius: 4,
+  },
+  effects: {
+    hoverOpacity: 0.8,
+    hoverShade: 20,
   },
 };

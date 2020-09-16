@@ -1,1 +1,10 @@
-{}
+{
+  "name": {
+    "is": "Gunnar Birnir Ólafsson",
+    "en-US": "Gunnar Birnir Ólafsson"
+  },
+  "backToTop": {
+    "is": "Efst á síðu",
+    "en-US": "Back to top"
+  }
+}

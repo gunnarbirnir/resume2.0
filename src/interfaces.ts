@@ -11,6 +11,8 @@ export interface ITheme {
     textPrimary: string;
     textSecondary: string;
     white: string;
+    darkGray: string;
+    mediumGray: string;
     backgroundGray: string;
   };
   breakpoints: {
@@ -32,6 +34,10 @@ export interface ITheme {
   dimensions: {
     contentWidth: number;
     borderRadius: number;
+  };
+  effects: {
+    hoverOpacity: number;
+    hoverShade: number;
   };
 }
 

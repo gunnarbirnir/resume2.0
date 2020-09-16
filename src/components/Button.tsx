@@ -20,7 +20,10 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     outline: 0,
     borderRadius: theme.dimensions.borderRadius,
     '&:hover': {
-      backgroundColor: shadeColor(theme.colors.primary, 15),
+      backgroundColor: shadeColor(
+        theme.colors.primary,
+        theme.effects.hoverShade
+      ),
     },
   },
   small: {
