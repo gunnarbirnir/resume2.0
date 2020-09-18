@@ -1,5 +1,11 @@
-const darkGray = '#2e2e2e';
-const mediumGray = '#696969';
+const grays = {
+  darkGray: '#2e2e2e',
+  mediumDarkGray: '#525252',
+  mediumGray: '#696969',
+  mediumLightGray: '#9e9e9e',
+  lightGray: '#fafafa',
+};
+
 const breakpoints = {
   xs: 600,
   sm: 960,
@@ -10,12 +16,10 @@ const breakpoints = {
 module.exports = {
   colors: {
     primary: '#006a91',
-    textPrimary: darkGray,
-    textSecondary: mediumGray,
+    textPrimary: grays.darkGray,
+    textSecondary: grays.mediumGray,
     white: '#ffffff',
-    darkGray,
-    mediumGray,
-    backgroundGray: '#fafafa',
+    ...grays,
   },
   breakpoints,
   mediaQueries: {
@@ -31,6 +35,7 @@ module.exports = {
   dimensions: {
     contentWidth: 1200,
     borderRadius: 4,
+    navbarHeight: 48,
   },
   effects: {
     hoverOpacity: 0.8,

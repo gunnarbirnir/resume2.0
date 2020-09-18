@@ -3,9 +3,10 @@ import { createUseStyles } from 'react-jss';
 import cx from 'classnames';
 
 import SEO, { IProps as SEOProps } from './SEO';
+import Navbar from './Navbar';
 import Footer from './Footer';
 import { spacing, scrollTo } from '../utils';
-import { ILocale } from '../interfaces';
+import { ILocale, IScrollSection } from '../interfaces';
 import useWindowSize from '../hooks/useWindowSize';
 import useObjectSize from '../hooks/useObjectSize';
 
@@ -13,6 +14,7 @@ interface IProps {
   locale: ILocale;
   seo?: Partial<SEOProps>;
   padding?: boolean;
+  pageSections?: IScrollSection[];
 }
 
 const CONTAINER_ID = 'layout-container';
@@ -42,6 +44,7 @@ const Layout: React.FC<IProps> = ({
   locale,
   seo,
   padding = true,
+  pageSections,
 }) => {
   const classes = useStyles();
   const windowSize = useWindowSize();
@@ -52,6 +55,7 @@ const Layout: React.FC<IProps> = ({
   return (
     <div id={CONTAINER_ID} className={classes.container} ref={contentRef}>
       <SEO locale={locale} {...seo} />
+      {pageSections && <Navbar locale={locale} pageSections={pageSections} />}
       <div style={{ flex: 1 }} className={cx({ [classes.padding]: padding })}>
         {children}
       </div>

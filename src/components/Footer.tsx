@@ -17,7 +17,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   container: {
     justifySelf: 'flex-end',
     width: '100%',
-    backgroundColor: theme.colors.mediumGray,
+    backgroundColor: theme.colors.mediumDarkGray,
     padding: spacing(2),
   },
   content: {

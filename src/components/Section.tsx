@@ -14,6 +14,13 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   container: {
     minHeight: 500,
     padding: spacing(3),
+    position: 'relative',
+  },
+  scrollElement: {
+    position: 'absolute',
+    top: -theme.dimensions.navbarHeight,
+    height: theme.dimensions.navbarHeight,
+    visibility: 'hidden',
   },
   content: {
     margin: '0px auto',
@@ -34,15 +41,13 @@ const Section: React.FC<IProps> = ({
 
   return (
     <div
-      id={section.scrollId}
       className={classes.container}
       style={{
         backgroundColor:
-          background === 'white'
-            ? theme.colors.white
-            : theme.colors.backgroundGray,
+          background === 'white' ? theme.colors.white : theme.colors.lightGray,
       }}
     >
+      <div id={section.scrollId} className={classes.scrollElement} />
       <div className={classes.content}>
         <h2 className={classes.title}>{section.title}</h2>
         {children}

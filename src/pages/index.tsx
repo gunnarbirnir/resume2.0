@@ -37,7 +37,7 @@ const ResumePage: React.FC<IProps> = ({ data, location }) => {
     : [];
 
   return (
-    <Layout locale={locale} padding={false}>
+    <Layout locale={locale} padding={false} pageSections={pageSections}>
       <About info={info} locale={locale} pageSections={pageSections} />
       {renderSections()}
     </Layout>
