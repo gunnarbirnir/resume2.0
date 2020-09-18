@@ -41,6 +41,7 @@ class ImageBlur extends React.Component<IProps, IState> {
           bottom: 0,
           width: '100%',
           opacity: imgLoaded ? 1 : 0,
+          transition: 'opacity 500ms',
         }}
       >
         <svg x="0" y="0" width={containerWidth} height={containerHeight}>
