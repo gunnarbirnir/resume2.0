@@ -21,6 +21,7 @@ interface IProps {
   info: IPersonalInfo | null;
   locale: ILocale;
   pageSections: IScrollSection[];
+  contentSize: { height: number; width: number };
 }
 
 const PROFILE_PIC_SIZE = 180;
@@ -135,12 +136,15 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   },
 }));
 
-const About: React.FC<IProps> = ({ info, locale, pageSections }) => {
+const Header: React.FC<IProps> = ({
+  info,
+  locale,
+  pageSections,
+  contentSize,
+}) => {
   const classes = useStyles();
   const theme = useTheme();
   const windowSize = useWindowSize();
-  const contentRef = useRef(null);
-  const contentSize = useObjectSize(contentRef);
   const [disableArrowAnimation, setDisableArrowAnimation] = useState(false);
 
   const backgroundHeight = getBackgroundHeight();
@@ -165,10 +169,7 @@ const About: React.FC<IProps> = ({ info, locale, pageSections }) => {
         />
       </div>
 
-      <div
-        ref={contentRef}
-        className={cx(classes.flexContainer, classes.container)}
-      >
+      <div className={cx(classes.flexContainer, classes.container)}>
         <div className={classes.localeContainer}>
           <div className={classes.localeSelector}>
             <LocaleSelector locale={locale} />
@@ -304,4 +305,4 @@ const About: React.FC<IProps> = ({ info, locale, pageSections }) => {
   }
 };
 
-export default About;
+export default Header;

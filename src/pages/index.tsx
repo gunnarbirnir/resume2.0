@@ -1,7 +1,7 @@
-import React, { createRef } from 'react';
+import React, { useRef } from 'react';
 import { graphql } from 'gatsby';
 
-import About from '../components/About';
+import Header from '../components/Header';
 import Layout from '../components/Layout';
 import WorkSection from '../components/WorkSection';
 import ProjectsSection from '../components/ProjectsSection';
@@ -10,6 +10,7 @@ import AccoladesSection from '../components/AccoladesSection';
 import ReferencesSection from '../components/ReferencesSection';
 import { IPersonalInfo, IPageProps, IEdges, IPageLayout } from '../interfaces';
 import { getLocale, getFirstOfLocale } from '../utils';
+import useObjectSize from '../hooks/useObjectSize';
 
 interface IProps extends IPageProps {
   data: {
@@ -23,6 +24,9 @@ interface IProps extends IPageProps {
 }
 
 const ResumePage: React.FC<IProps> = ({ data, location }) => {
+  const headerRef = useRef(null);
+  const headerSize = useObjectSize(headerRef);
+
   const locale = getLocale(location.pathname);
   const info = getFirstOfLocale(data.allContentfulInfo.edges, locale);
   const pageLayout = getFirstOfLocale(
@@ -36,9 +40,23 @@ const ResumePage: React.FC<IProps> = ({ data, location }) => {
       }))
     : [];
 
+  console.log('headerSize: ', headerSize);
+
   return (
-    <Layout locale={locale} padding={false} pageSections={pageSections}>
-      <About info={info} locale={locale} pageSections={pageSections} />
+    <Layout
+      locale={locale}
+      padding={false}
+      pageSections={pageSections}
+      headerSize={headerSize}
+    >
+      <div ref={headerRef}>
+        <Header
+          info={info}
+          locale={locale}
+          pageSections={pageSections}
+          contentSize={headerSize}
+        />
+      </div>
       {renderSections()}
     </Layout>
   );

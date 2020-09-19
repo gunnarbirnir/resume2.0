@@ -4,15 +4,14 @@ import cx from 'classnames';
 
 import FlexContainer from './FlexContainer';
 import Button from './Button';
-import { ITheme, ILocale, IScrollSection } from '../interfaces';
+import { ITheme, IScrollSection } from '../interfaces';
 import { spacing, scrollTo } from '../utils';
 import useTheme from '../hooks/useTheme';
-import useWindowSize from '../hooks/useWindowSize';
 import useScrollPosition from '../hooks/useScrollPosition';
 
 interface IProps {
-  locale: ILocale;
   pageSections: IScrollSection[];
+  headerSize: { height: number; width: number };
 }
 
 const useStyles = createUseStyles((theme: ITheme) => ({
@@ -42,13 +41,12 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   },
 }));
 
-const Navbar: React.FC<IProps> = ({ locale, pageSections }) => {
+const Navbar: React.FC<IProps> = ({ pageSections, headerSize }) => {
   const classes = useStyles();
   const theme = useTheme();
-  const windowSize = useWindowSize();
   const scrollPos = useScrollPosition();
   const hideNavbar =
-    !scrollPos || scrollPos < windowSize.height - theme.dimensions.navbarHeight;
+    !scrollPos || scrollPos < headerSize.height - theme.dimensions.navbarHeight;
 
   return (
     <FlexContainer

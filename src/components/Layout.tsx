@@ -15,6 +15,7 @@ interface IProps {
   seo?: Partial<SEOProps>;
   padding?: boolean;
   pageSections?: IScrollSection[];
+  headerSize?: { height: number; width: number };
 }
 
 const CONTAINER_ID = 'layout-container';
@@ -45,6 +46,7 @@ const Layout: React.FC<IProps> = ({
   seo,
   padding = true,
   pageSections,
+  headerSize,
 }) => {
   const classes = useStyles();
   const windowSize = useWindowSize();
@@ -55,7 +57,9 @@ const Layout: React.FC<IProps> = ({
   return (
     <div id={CONTAINER_ID} className={classes.container} ref={contentRef}>
       <SEO locale={locale} {...seo} />
-      {pageSections && <Navbar locale={locale} pageSections={pageSections} />}
+      {pageSections && headerSize && (
+        <Navbar pageSections={pageSections} headerSize={headerSize} />
+      )}
       <div style={{ flex: 1 }} className={cx({ [classes.padding]: padding })}>
         {children}
       </div>
