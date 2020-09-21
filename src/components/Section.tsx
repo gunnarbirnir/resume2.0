@@ -21,6 +21,10 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     top: -theme.dimensions.navbarHeight,
     height: theme.dimensions.navbarHeight,
     visibility: 'hidden',
+    [theme.mediaQueries.xsDown]: {
+      top: 0,
+      height: 0,
+    },
   },
   content: {
     margin: '0px auto',
