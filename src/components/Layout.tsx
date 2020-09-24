@@ -24,7 +24,7 @@ const useStyles = createUseStyles({
   '@global': {
     h1: { marginBottom: 0 },
     h2: { marginBottom: 0, fontSize: '2rem' },
-    h3: { marginBottom: 0 },
+    h3: { marginBottom: 0, fontSize: '1.2rem' },
     h4: { marginBottom: 0 },
     h5: { marginBottom: 0 },
     h6: { marginBottom: 0 },

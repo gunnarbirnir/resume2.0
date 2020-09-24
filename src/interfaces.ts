@@ -91,3 +91,11 @@ export interface IScrollSection extends IPageSection {
 export interface IPageLayout extends IContentfulData {
   sections: IPageSection[];
 }
+
+export interface IJob extends IContentfulData {
+  company: string;
+  jobTitle: string;
+  website: string;
+  startYear: number;
+  endYear: number | null;
+}

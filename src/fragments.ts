@@ -38,4 +38,14 @@ export const query = graphql`
       ...PageSection
     }
   }
+
+  fragment Job on ContentfulJob {
+    id
+    node_locale
+    company
+    jobTitle
+    website
+    startYear
+    endYear
+  }
 `;

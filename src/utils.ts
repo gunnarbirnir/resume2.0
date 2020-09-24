@@ -23,6 +23,13 @@ export function getFirstOfLocale<T extends IContentfulData>(
   return null;
 }
 
+export function getAllForLocale<T extends IContentfulData>(
+  edges: IEdges<T>,
+  locale: ILocale
+) {
+  return edges.filter((e) => e.node.node_locale === locale).map((e) => e.node);
+}
+
 export function spacing(
   size: number,
   size2?: number,

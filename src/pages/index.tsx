@@ -8,8 +8,14 @@ import ProjectsSection from '../components/ProjectsSection';
 import SkillsSection from '../components/SkillsSection';
 import AccoladesSection from '../components/AccoladesSection';
 import ReferencesSection from '../components/ReferencesSection';
-import { IPersonalInfo, IPageProps, IEdges, IPageLayout } from '../interfaces';
-import { getLocale, getFirstOfLocale } from '../utils';
+import {
+  IPersonalInfo,
+  IPageProps,
+  IEdges,
+  IPageLayout,
+  IJob,
+} from '../interfaces';
+import { getLocale, getFirstOfLocale, getAllForLocale } from '../utils';
 import useObjectSize from '../hooks/useObjectSize';
 
 interface IProps extends IPageProps {
@@ -19,6 +25,9 @@ interface IProps extends IPageProps {
     };
     allContentfulPageLayout: {
       edges: IEdges<IPageLayout>;
+    };
+    allContentfulJob: {
+      edges: IEdges<IJob>;
     };
   };
 }
@@ -39,8 +48,7 @@ const ResumePage: React.FC<IProps> = ({ data, location }) => {
         scrollId: `${section.component}-${section.id}`,
       }))
     : [];
-
-  console.log('headerSize: ', headerSize);
+  const jobs = getAllForLocale(data.allContentfulJob.edges, locale);
 
   return (
     <Layout
@@ -65,7 +73,7 @@ const ResumePage: React.FC<IProps> = ({ data, location }) => {
     return pageSections.map((section) => {
       switch (section.component) {
         case 'work':
-          return <WorkSection key={section.id} section={section} />;
+          return <WorkSection key={section.id} section={section} jobs={jobs} />;
         case 'projects':
           return <ProjectsSection key={section.id} section={section} />;
         case 'skills':
@@ -92,6 +100,13 @@ export const query = graphql`
       edges {
         node {
           ...PageLayout
+        }
+      }
+    }
+    allContentfulJob(sort: { order: DESC, fields: startYear }) {
+      edges {
+        node {
+          ...Job
         }
       }
     }
