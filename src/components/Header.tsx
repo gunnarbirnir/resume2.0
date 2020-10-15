@@ -15,7 +15,6 @@ import { IPersonalInfo, ILocale, ITheme, IScrollSection } from '../interfaces';
 import { spacing, scrollTo } from '../utils';
 import useWindowSize from '../hooks/useWindowSize';
 import useTheme from '../hooks/useTheme';
-import useObjectSize from '../hooks/useObjectSize';
 
 interface IProps {
   info: IPersonalInfo | null;
@@ -40,9 +39,11 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   },
   container: {
     zIndex: 1,
-    minHeight: '100vh',
     padding: `${spacing(3)} ${SIDE_PADDING}px`,
     position: 'relative',
+    [theme.mediaQueries.xsUp]: {
+      minHeight: '100vh',
+    },
   },
   localeContainer: {
     display: 'flex',
@@ -73,6 +74,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
       flexDirection: 'column',
       alignItems: 'center',
       textAlign: 'center',
+      paddingBottom: 20,
     },
   },
   profile: {
@@ -92,6 +94,9 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     bottom: 0,
     left: 0,
     right: 0,
+    [theme.mediaQueries.xsDown]: {
+      display: 'none !important',
+    },
   },
   '@keyframes bounce': {
     '2%': { transform: 'translateY(0px)' },
