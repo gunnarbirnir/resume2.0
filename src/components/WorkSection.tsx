@@ -39,7 +39,6 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   jobTitle: {
     color: theme.colors.primary,
     marginBottom: spacing(1),
-    fontSize: 14,
     [theme.mediaQueries.xsDown]: {
       color: theme.colors.textSecondary,
     },
