@@ -24,9 +24,10 @@ class ImageBlur extends React.Component<IProps, IState> {
 
   componentDidMount() {
     // onLoad didn't work on safari
-    if (browserName === 'Safari') {
+    /* if (browserName === 'Safari') {
       this.setLoaded();
-    }
+    } */
+    this.setLoaded();
   }
 
   render() {
@@ -55,7 +56,7 @@ class ImageBlur extends React.Component<IProps, IState> {
             xlinkHref={src}
             preserveAspectRatio="xMidYMid slice"
             filter="url(#blur)"
-            onLoad={this.setLoaded}
+            // onLoad={this.setLoaded}
           />
           {this.renderColorOverlay()}
         </svg>
