@@ -18,6 +18,17 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   years: {
     width: 100,
     textAlign: 'right',
+    [theme.mediaQueries.xsDown]: {
+      display: 'none',
+    },
+  },
+  mobileYears: {
+    fontWeight: 'bold',
+    marginRight: 6,
+    color: theme.colors.primary,
+    [theme.mediaQueries.xsUp]: {
+      display: 'none',
+    },
   },
   title: {
     margin: '4px 0px',
@@ -26,10 +37,12 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     },
   },
   jobTitle: {
-    fontWeight: 'normal',
-    fontSize: '1.1rem',
     color: theme.colors.primary,
-    marginLeft: 6,
+    marginBottom: spacing(1),
+    fontSize: 14,
+    [theme.mediaQueries.xsDown]: {
+      color: theme.colors.textSecondary,
+    },
   },
   marker: {
     zIndex: 2,
@@ -40,6 +53,9 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     borderRadius: '50%',
     border: `4px solid ${theme.colors.primary}`,
     backgroundColor: theme.colors.lightGray,
+    [theme.mediaQueries.xsDown]: {
+      marginLeft: 0,
+    },
   },
   line: {
     zIndex: 1,
@@ -62,10 +78,7 @@ const WorkSection: React.FC<IProps> = ({ jobs, section }) => {
           <FlexContainer key={job.id} direction="row" alignItems="flex-start">
             <FlexContainer direction="row" alignItems="center">
               <p key={job.id} className={classes.years}>
-                {job.startYear}
-                {job.endYear && job.startYear !== job.endYear
-                  ? ` - ${job.endYear}`
-                  : ''}
+                {getYearsString(job)}
               </p>
               <div className={classes.marker} />
             </FlexContainer>
@@ -79,9 +92,14 @@ const WorkSection: React.FC<IProps> = ({ jobs, section }) => {
                 >
                   <h3 key={job.id} className={classes.title}>
                     {job.company}
-                    <span className={classes.jobTitle}>{job.jobTitle}</span>
                   </h3>
                 </a>
+                <p className={classes.jobTitle}>
+                  <span className={classes.mobileYears}>
+                    {getYearsString(job)}
+                  </span>
+                  {job.jobTitle}
+                </p>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
                   suscipit consequat odio, vitae ullamcorper ante luctus ut.
@@ -97,6 +115,12 @@ const WorkSection: React.FC<IProps> = ({ jobs, section }) => {
       </div>
     </Section>
   );
+
+  function getYearsString(job: IJob) {
+    return `${job.startYear}${
+      job.endYear && job.startYear !== job.endYear ? ` - ${job.endYear}` : ''
+    }`;
+  }
 };
 
 export default WorkSection;
