@@ -96,6 +96,9 @@ export interface IJob extends IContentfulData {
   company: string;
   jobTitle: string;
   website: string;
-  startYear: number;
-  endYear: number | null;
+  start: string;
+  end: string;
+  description: {
+    description: string;
+  };
 }

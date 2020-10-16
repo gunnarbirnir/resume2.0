@@ -45,7 +45,10 @@ export const query = graphql`
     company
     jobTitle
     website
-    startYear
-    endYear
+    start(formatString: "YYYY")
+    end(formatString: "YYYY")
+    description {
+      description
+    }
   }
 `;

@@ -103,7 +103,7 @@ export const query = graphql`
         }
       }
     }
-    allContentfulJob(sort: { order: DESC, fields: startYear }) {
+    allContentfulJob(sort: { fields: start, order: DESC }) {
       edges {
         node {
           ...Job

@@ -99,13 +99,7 @@ const WorkSection: React.FC<IProps> = ({ jobs, section }) => {
                   </span>
                   {job.jobTitle}
                 </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                  suscipit consequat odio, vitae ullamcorper ante luctus ut.
-                  Quisque finibus, metus sed egestas mattis, quam libero mattis
-                  ante, sed mollis tortor orci sit amet diam. Nunc at purus
-                  tellus. Etiam ut mauris ac lacus feugiat porttitor.
-                </p>
+                <p>{job.description.description}</p>
               </div>
               {index < jobs.length - 1 && <div className={classes.line} />}
             </div>
@@ -116,8 +110,8 @@ const WorkSection: React.FC<IProps> = ({ jobs, section }) => {
   );
 
   function getYearsString(job: IJob) {
-    return `${job.startYear}${
-      job.endYear && job.startYear !== job.endYear ? ` - ${job.endYear}` : ''
+    return `${job.start}${
+      job.end && job.start !== job.end ? ` - ${job.end}` : ''
     }`;
   }
 };
