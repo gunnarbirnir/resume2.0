@@ -31,7 +31,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     maxWidth: theme.dimensions.contentWidth,
   },
   title: {
-    marginBottom: spacing(2),
+    marginBottom: spacing(3),
   },
 }));
 
