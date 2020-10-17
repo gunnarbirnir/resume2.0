@@ -92,6 +92,8 @@ export interface IPageLayout extends IContentfulData {
   sections: IPageSection[];
 }
 
+export type IBackgroundColor = 'white' | 'gray';
+
 export interface IJob extends IContentfulData {
   company: string;
   jobTitle: string;

@@ -33,7 +33,7 @@ module.exports = {
     lgUp: `@media (min-width: ${breakpoints.lg}px)`,
   },
   dimensions: {
-    contentWidth: 1200,
+    contentWidth: 1100,
     borderRadius: 4,
     navbarHeight: 48,
   },

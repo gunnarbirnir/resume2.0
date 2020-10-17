@@ -3,12 +3,13 @@ import { createUseStyles } from 'react-jss';
 
 import Section from './Section';
 import FlexContainer from './FlexContainer';
-import { IScrollSection, IJob, ITheme } from '../interfaces';
-import { spacing } from '../utils';
+import { IScrollSection, IJob, ITheme, IBackgroundColor } from '../interfaces';
+import { spacing, getBackgroundColor } from '../utils';
 
 interface IProps {
   jobs: IJob[];
   section: IScrollSection;
+  background: IBackgroundColor;
 }
 
 const MARKER_SIZE = 28;
@@ -51,7 +52,6 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     width: MARKER_SIZE,
     borderRadius: '50%',
     border: `4px solid ${theme.colors.primary}`,
-    backgroundColor: theme.colors.lightGray,
     [theme.mediaQueries.xsDown]: {
       marginLeft: 0,
     },
@@ -67,11 +67,11 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   },
 }));
 
-const WorkSection: React.FC<IProps> = ({ jobs, section }) => {
+const WorkSection: React.FC<IProps> = ({ jobs, section, background }) => {
   const classes = useStyles();
 
   return (
-    <Section section={section} background="gray">
+    <Section section={section} background={background}>
       <div style={{ maxWidth: 865, margin: '0px auto' }}>
         {jobs.map((job, index) => (
           <FlexContainer key={job.id} direction="row" alignItems="flex-start">
@@ -79,7 +79,10 @@ const WorkSection: React.FC<IProps> = ({ jobs, section }) => {
               <p key={job.id} className={classes.years}>
                 {getYearsString(job)}
               </p>
-              <div className={classes.marker} />
+              <div
+                className={classes.marker}
+                style={{ backgroundColor: getBackgroundColor(background) }}
+              />
             </FlexContainer>
             <div style={{ marginBottom: spacing(4), position: 'relative' }}>
               <div data-sal="slide-right" data-sal-duration="500">

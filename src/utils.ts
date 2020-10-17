@@ -1,6 +1,12 @@
 import smoothScroll from 'gatsby-plugin-smoothscroll';
 
-import { ILocale, IEdges, IContentfulData } from './interfaces';
+import {
+  ILocale,
+  IEdges,
+  IContentfulData,
+  IBackgroundColor,
+} from './interfaces';
+import useTheme from './hooks/useTheme';
 
 export function getLocale(pathname: string): ILocale {
   const path = pathname.split('/');
@@ -73,4 +79,9 @@ export function shadeColor(color: string, percent: number) {
 
 export function scrollTo(id: string) {
   smoothScroll(`#${id}`);
+}
+
+export function getBackgroundColor(color: IBackgroundColor) {
+  const theme = useTheme();
+  return color === 'white' ? theme.colors.white : theme.colors.lightGray;
 }

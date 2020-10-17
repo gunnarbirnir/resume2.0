@@ -1,13 +1,13 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
 
-import { ITheme, IScrollSection } from '../interfaces';
-import { spacing } from '../utils';
+import { ITheme, IScrollSection, IBackgroundColor } from '../interfaces';
+import { spacing, getBackgroundColor } from '../utils';
 import useTheme from '../hooks/useTheme';
 
 interface IProps {
   section: IScrollSection;
-  background?: 'white' | 'gray';
+  background: IBackgroundColor;
 }
 
 const useStyles = createUseStyles((theme: ITheme) => ({
@@ -35,21 +35,14 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   },
 }));
 
-const Section: React.FC<IProps> = ({
-  section,
-  background = 'white',
-  children,
-}) => {
+const Section: React.FC<IProps> = ({ section, background, children }) => {
   const classes = useStyles();
   const theme = useTheme();
 
   return (
     <div
       className={classes.container}
-      style={{
-        backgroundColor:
-          background === 'white' ? theme.colors.white : theme.colors.lightGray,
-      }}
+      style={{ backgroundColor: getBackgroundColor(background) }}
     >
       <div id={section.scrollId} className={classes.scrollElement} />
       <div className={classes.content}>

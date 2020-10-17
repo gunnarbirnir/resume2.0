@@ -70,18 +70,50 @@ const ResumePage: React.FC<IProps> = ({ data, location }) => {
   );
 
   function renderSections() {
-    return pageSections.map((section) => {
+    return pageSections.map((section, index) => {
+      const background = index % 2 ? 'white' : 'gray';
       switch (section.component) {
         case 'work':
-          return <WorkSection key={section.id} section={section} jobs={jobs} />;
+          return (
+            <WorkSection
+              key={section.id}
+              jobs={jobs}
+              section={section}
+              background={background}
+            />
+          );
         case 'projects':
-          return <ProjectsSection key={section.id} section={section} />;
+          return (
+            <ProjectsSection
+              key={section.id}
+              section={section}
+              background={background}
+            />
+          );
         case 'skills':
-          return <SkillsSection key={section.id} section={section} />;
+          return (
+            <SkillsSection
+              key={section.id}
+              section={section}
+              background={background}
+            />
+          );
         case 'accolades':
-          return <AccoladesSection key={section.id} section={section} />;
+          return (
+            <AccoladesSection
+              key={section.id}
+              section={section}
+              background={background}
+            />
+          );
         case 'references':
-          return <ReferencesSection key={section.id} section={section} />;
+          return (
+            <ReferencesSection
+              key={section.id}
+              section={section}
+              background={background}
+            />
+          );
       }
     });
   }
