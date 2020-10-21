@@ -200,12 +200,12 @@ const Header: React.FC<IProps> = ({
               >
                 <ContactInfo
                   text={info.email}
-                  link={`mailto:${info.email}`}
+                  // link={`mailto:${info.email}`}
                   Icon={IoMdMail}
                 />
                 <ContactInfo
                   text={info.phoneNumber}
-                  link={`tel:${info.phoneNumber}`}
+                  // link={`tel:${info.phoneNumber}`}
                   Icon={FaPhone}
                   iconSize={15}
                 />
@@ -243,7 +243,7 @@ const Header: React.FC<IProps> = ({
 
   function ContactInfo(contactProps: {
     text: string;
-    link: string;
+    link?: string;
     newTab?: boolean;
     Icon: IconType;
     iconSize?: number;
@@ -261,14 +261,18 @@ const Header: React.FC<IProps> = ({
           color={theme.colors.primary}
           style={{ marginRight: spacing(1) }}
         />
-        <a
-          href={link}
-          target={newTab ? '_blank' : undefined}
-          rel={newTab ? 'noopener noreferrer' : undefined}
-          className={classes.contactLink}
-        >
-          {text}
-        </a>
+        {link ? (
+          <a
+            href={link}
+            target={newTab ? '_blank' : undefined}
+            rel={newTab ? 'noopener noreferrer' : undefined}
+            className={classes.contactLink}
+          >
+            {text}
+          </a>
+        ) : (
+          <p style={{ color: theme.colors.textSecondary }}>{text}</p>
+        )}
       </FlexContainer>
     );
   }

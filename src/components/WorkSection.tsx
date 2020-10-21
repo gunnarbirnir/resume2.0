@@ -32,6 +32,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     },
   },
   title: {
+    fontSize: '1.2rem',
     margin: '4px 0px',
     '&:hover': {
       color: theme.colors.primary,
@@ -84,8 +85,13 @@ const WorkSection: React.FC<IProps> = ({ jobs, section, background }) => {
                 style={{ backgroundColor: getBackgroundColor(background) }}
               />
             </FlexContainer>
-            <div style={{ marginBottom: spacing(4), position: 'relative' }}>
-              <div data-sal="slide-right" data-sal-duration="500">
+            <div
+              style={{
+                marginBottom: index !== jobs.length - 1 ? spacing(4) : 0,
+                position: 'relative',
+              }}
+            >
+              <div data-sal="slide-up" data-sal-duration="500">
                 <a
                   href={job.website}
                   target="_blank"

@@ -104,3 +104,11 @@ export interface IJob extends IContentfulData {
     description: string;
   };
 }
+
+export interface IProject extends IContentfulData {
+  title: string;
+  description: {
+    description: string;
+  };
+  images: [{ fluid: FluidObject }];
+}

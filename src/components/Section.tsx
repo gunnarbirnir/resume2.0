@@ -14,6 +14,8 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   container: {
     minHeight: 500,
     padding: spacing(3),
+    paddingTop: spacing(4),
+    paddingBottom: spacing(6),
     position: 'relative',
   },
   scrollElement: {
@@ -31,13 +33,12 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     maxWidth: theme.dimensions.contentWidth,
   },
   title: {
-    marginBottom: spacing(3),
+    marginBottom: spacing(4),
   },
 }));
 
 const Section: React.FC<IProps> = ({ section, background, children }) => {
   const classes = useStyles();
-  const theme = useTheme();
 
   return (
     <div

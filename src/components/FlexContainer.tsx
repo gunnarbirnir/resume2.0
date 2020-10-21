@@ -10,7 +10,13 @@ interface IProps {
   className?: string;
 }
 
-const FlexContainer: React.FC<IProps> = ({
+const FlexContainer: React.FC<
+  IProps &
+    React.DetailedHTMLProps<
+      React.HTMLAttributes<HTMLDivElement>,
+      HTMLDivElement
+    >
+> = ({
   children,
   flex,
   direction,
@@ -19,6 +25,7 @@ const FlexContainer: React.FC<IProps> = ({
   wrap,
   style,
   className,
+  ...props
 }) => {
   return (
     <div
@@ -32,6 +39,7 @@ const FlexContainer: React.FC<IProps> = ({
         ...style,
       }}
       className={className}
+      {...props}
     >
       {children}
     </div>

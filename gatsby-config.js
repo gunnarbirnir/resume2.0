@@ -60,5 +60,6 @@ module.exports = {
     },
     `gatsby-plugin-scroll-reveal`,
     `gatsby-plugin-smoothscroll`,
+    `gatsby-background-image`,
   ],
 };

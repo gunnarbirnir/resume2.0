@@ -51,4 +51,18 @@ export const query = graphql`
       description
     }
   }
+
+  fragment Project on ContentfulProject {
+    id
+    node_locale
+    title
+    description {
+      description
+    }
+    images {
+      fluid {
+        ...GatsbyContentfulFluid
+      }
+    }
+  }
 `;
