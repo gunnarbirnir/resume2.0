@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import BackgroundImage from 'gatsby-background-image';
-import { IoIosArrowDropleftCircle } from 'react-icons/io';
+import { RiArrowLeftSLine } from 'react-icons/ri';
 import cx from 'classnames';
 
 import Section from './Section';
@@ -53,25 +53,18 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   arrowContainer: {
     position: 'absolute',
     top: `calc(50% - ${ARROW_SIZE / 2}px)`,
-  },
-  activeArrowContainer: {
-    cursor: 'pointer',
-    '&:active': {
-      transform: 'scale(1.1)',
-    },
-  },
-  arrowBackground: {
     height: ARROW_SIZE,
     width: ARROW_SIZE,
-    backgroundColor: theme.colors.white,
-    transform: 'scale(0.8)',
+    backgroundColor: theme.colors.mediumLightGray,
     borderRadius: '50%',
     boxShadow: '0px 3px 10px 0px rgba(0,0,0,0.75)',
   },
-  arrow: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
+  activeArrowContainer: {
+    cursor: 'pointer',
+    backgroundColor: theme.colors.primary,
+    '&:active': {
+      transform: 'scale(1.1)',
+    },
   },
   activeArrow: {
     '&:hover': {
@@ -80,16 +73,18 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   },
   dotContainer: {
     position: 'absolute',
-    bottom: 15,
+    top: 0,
+    left: 0,
     width: '100%',
+    height: '100%',
+    background: 'linear-gradient(rgba(0,0,0,0) 80%, rgba(0,0,0,0.6))',
   },
   imgDot: {
     height: 10,
     width: 10,
     borderRadius: '50%',
-    margin: '0px 4px',
+    margin: '15px 4px',
     border: `1px solid ${theme.colors.white}`,
-    boxShadow: '0px 2px 10px 0px rgba(0,0,0,0.75)',
   },
 }));
 
@@ -122,8 +117,8 @@ const ProjectsSection: React.FC<IProps> = ({
         style={{
           flexDirection: xsDown ? 'column' : isOdd ? 'row-reverse' : 'row',
         }}
+        // data-sal="slide-up"
         data-sal-duration="500"
-        data-sal="slide-up"
       >
         <div
           className={classes.imageContainer}
@@ -140,9 +135,9 @@ const ProjectsSection: React.FC<IProps> = ({
             className={classes.backgroundImage}
             onClick={() => nextImage(projectIndex)}
           />
+          {renderImgDots(projectIndex)}
           {renderArrow('prev', projectIndex)}
           {renderArrow('next', projectIndex)}
-          {renderImgDots(projectIndex)}
         </div>
         <div style={{ flex: 1 }}>
           <h3 className={classes.title}>{project.title}</h3>
@@ -165,7 +160,9 @@ const ProjectsSection: React.FC<IProps> = ({
         : () => nextImage(projectIndex);
 
     return (
-      <div
+      <FlexContainer
+        justifyContent="center"
+        alignItems="center"
         className={cx(classes.arrowContainer, {
           [classes.activeArrowContainer]: !disabled,
         })}
@@ -176,24 +173,26 @@ const ProjectsSection: React.FC<IProps> = ({
         }
         onClick={disabled ? undefined : onClick}
       >
-        <div className={classes.arrowBackground} />
-        <IoIosArrowDropleftCircle
+        <RiArrowLeftSLine
           size={ARROW_SIZE}
-          color={disabled ? theme.colors.mediumLightGray : theme.colors.primary}
-          className={cx(classes.arrow, { [classes.activeArrow]: !disabled })}
+          color={theme.colors.white}
+          className={cx({ [classes.activeArrow]: !disabled })}
           style={{
-            transform: direction === 'next' ? 'rotate(180deg)' : undefined,
+            transform:
+              direction === 'next'
+                ? 'translateX(2px) rotate(180deg)'
+                : 'translateX(-2px)',
           }}
         />
-      </div>
+      </FlexContainer>
     );
   }
 
   function renderImgDots(projectIndex: number) {
+    const dots = [];
     const imgIndex = imgSelection[projectIndex];
     const imgCount = projects[projectIndex].images.length;
 
-    const dots = [];
     for (var i = 0; i < imgCount; i++) {
       const index = i;
       const isCurrent = i === imgIndex;
@@ -216,6 +215,7 @@ const ProjectsSection: React.FC<IProps> = ({
       <FlexContainer
         direction="row"
         justifyContent="center"
+        alignItems="flex-end"
         className={classes.dotContainer}
       >
         {dots}
