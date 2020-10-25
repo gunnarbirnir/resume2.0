@@ -56,6 +56,7 @@ export const query = graphql`
     id
     node_locale
     title
+    display
     description {
       description
     }

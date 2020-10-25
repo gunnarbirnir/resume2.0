@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, createRef, useEffect } from 'react';
 import { createUseStyles } from 'react-jss';
-import BackgroundImage from 'gatsby-background-image';
 import { RiArrowLeftSLine } from 'react-icons/ri';
+import Img, { FluidObject } from 'gatsby-image';
+import BackgroundImage from 'gatsby-background-image';
 import cx from 'classnames';
 
 import Section from './Section';
@@ -15,6 +16,7 @@ import {
 import { spacing } from '../utils';
 import useTheme from '../hooks/useTheme';
 import useWindowSize from '../hooks/useWindowSize';
+import useObjectSizes from '../hooks/useObjectSizes';
 
 interface IProps {
   projects: IProject[];
@@ -26,7 +28,11 @@ const ARROW_SIZE = 40;
 
 const useStyles = createUseStyles((theme: ITheme) => ({
   project: {
+    position: 'relative',
+    padding: spacing(3),
     marginBottom: spacing(2),
+    backgroundColor: theme.colors.lightGray,
+    borderRadius: theme.dimensions.borderRadius,
     '&:not(:last-child)': {
       marginBottom: spacing(4),
     },
@@ -40,15 +46,34 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     height: 350,
     [theme.mediaQueries.xsDown]: {
       width: '100%',
-      height: 200,
+      height: 250,
     },
   },
-  backgroundImage: {
-    height: '100%',
-    width: '100%',
-    backgroundPosition: 'center center',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
+  portraitContainer: {
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  imageArea: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    visibility: 'hidden',
+    width: '70%',
+    height: 350,
+    [theme.mediaQueries.smDown]: {
+      width: '50%',
+      height: 300,
+    },
+    [theme.mediaQueries.xsDown]: {
+      width: '100%',
+      height: 250,
+    },
+  },
+  portraitImage: {
+    margin: spacing(0, 1),
+    position: 'relative',
   },
   arrowContainer: {
     position: 'absolute',
@@ -57,7 +82,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     width: ARROW_SIZE,
     backgroundColor: theme.colors.mediumLightGray,
     borderRadius: '50%',
-    boxShadow: '0px 3px 10px 0px rgba(0,0,0,0.75)',
+    boxShadow: '0px 2px 10px 0px rgba(0,0,0,0.5)',
   },
   activeArrowContainer: {
     cursor: 'pointer',
@@ -77,7 +102,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     left: 0,
     width: '100%',
     height: '100%',
-    background: 'linear-gradient(rgba(0,0,0,0) 80%, rgba(0,0,0,0.6))',
+    background: 'linear-gradient(rgba(0,0,0,0) 80%, rgba(0,0,0,0.3))',
   },
   imgDot: {
     height: 10,
@@ -97,18 +122,32 @@ const ProjectsSection: React.FC<IProps> = ({
   const theme = useTheme();
   const windowSize = useWindowSize();
   const xsDown = windowSize.width <= theme.breakpoints.xs;
+
+  const [imgContainerRefs, setImgContainerRefs] = useState<
+    React.RefObject<HTMLDivElement>[]
+  >([]);
+  const imgContainerSizes = useObjectSizes(imgContainerRefs);
   const [imgSelection, setImgSelection] = useState<number[]>(
     projects.map((_) => 0)
   );
 
+  useEffect(() => {
+    setImgContainerRefs(projects.map((_) => createRef()));
+  }, [projects]);
+
+  useEffect(() => {
+    setImgSelection(projects.map((_) => 0));
+  }, [projects, windowSize.width]);
+
   return (
     <Section section={section} background={background}>
-      {projects.slice(0, 1).map(renderProject)}
+      {projects.map(renderProject)}
     </Section>
   );
 
   function renderProject(project: IProject, projectIndex: number) {
     const isOdd = projectIndex % 2;
+    const isPortrait = project.display === 'portrait';
 
     return (
       <FlexContainer
@@ -117,27 +156,38 @@ const ProjectsSection: React.FC<IProps> = ({
         style={{
           flexDirection: xsDown ? 'column' : isOdd ? 'row-reverse' : 'row',
         }}
-        // data-sal="slide-up"
+        data-sal="slide-up"
         data-sal-duration="500"
       >
         <div
-          className={classes.imageContainer}
+          className={classes.imageArea}
+          ref={imgContainerRefs[projectIndex]}
+        />
+        <div
+          className={
+            isPortrait ? classes.portraitContainer : classes.imageContainer
+          }
           style={
             xsDown
-              ? { marginBottom: spacing(2) }
+              ? { marginBottom: spacing(3) }
               : isOdd
               ? { marginLeft: spacing(4) }
               : { marginRight: spacing(4) }
           }
         >
-          <BackgroundImage
-            fluid={project.images[imgSelection[projectIndex]].fluid}
-            className={classes.backgroundImage}
-            onClick={() => nextImage(projectIndex)}
-          />
-          {renderImgDots(projectIndex)}
-          {renderArrow('prev', projectIndex)}
-          {renderArrow('next', projectIndex)}
+          {isPortrait ? (
+            renderPortraitImages(project.images, projectIndex)
+          ) : (
+            <React.Fragment>
+              <BackgroundImage
+                fluid={project.images[imgSelection[projectIndex]].fluid}
+                style={{ height: '100%', width: '100%' }}
+              />
+              {project.images.length && renderImgDots(projectIndex)}
+              {project.images.length && renderArrow('prev', projectIndex)}
+              {project.images.length && renderArrow('next', projectIndex)}
+            </React.Fragment>
+          )}
         </div>
         <div style={{ flex: 1 }}>
           <h3 className={classes.title}>{project.title}</h3>
@@ -147,17 +197,77 @@ const ProjectsSection: React.FC<IProps> = ({
     );
   }
 
-  function renderArrow(direction: 'prev' | 'next', projectIndex: number) {
+  function renderPortraitImages(
+    images: { fluid: FluidObject }[],
+    projectIndex: number
+  ) {
+    const imgIndex = imgSelection[projectIndex];
+    const displayImgs: ((children: React.ReactNode) => React.ReactNode)[] = [];
+    const containerSize = imgContainerSizes[projectIndex] || {
+      width: 0,
+      height: 0,
+    };
+    let widthUsed = 0;
+
+    images.slice(imgIndex).forEach((img, index) => {
+      const imgWidth = img.fluid.aspectRatio * containerSize.height;
+      const imgHeight = imgWidth * (1 / img.fluid.aspectRatio);
+
+      if (imgWidth < containerSize.width - widthUsed) {
+        widthUsed += imgWidth;
+        displayImgs.push((children: React.ReactNode) => (
+          <div
+            key={index}
+            className={classes.portraitImage}
+            style={{ width: imgWidth, maxHeight: imgHeight }}
+          >
+            <Img
+              fluid={img.fluid}
+              style={{
+                boxShadow: '0px 5px 10px 0px rgba(0,0,0,0.25)',
+              }}
+              imgStyle={{
+                objectFit: 'contain',
+                objectPosition: '50% 0%',
+                userSelect: 'none',
+              }}
+            />
+            {children}
+          </div>
+        ));
+      }
+    });
+
+    const displayArrows = images.length > displayImgs.length;
+    return displayImgs.map((img, index) =>
+      img(
+        <React.Fragment>
+          {displayArrows &&
+            index === 0 &&
+            renderArrow('prev', projectIndex, displayImgs.length)}
+          {displayArrows &&
+            index === displayImgs.length - 1 &&
+            renderArrow('next', projectIndex, displayImgs.length)}
+        </React.Fragment>
+      )
+    );
+  }
+
+  function renderArrow(
+    direction: 'prev' | 'next',
+    projectIndex: number,
+    imagesDisplayed: number = 1
+  ) {
     const horizontalPos = -15;
     const imgIndex = imgSelection[projectIndex];
     const disabled =
       (direction === 'prev' && imgIndex <= 0) ||
       (direction === 'next' &&
-        imgIndex >= projects[projectIndex].images.length - 1);
+        imgIndex + imagesDisplayed >= projects[projectIndex].images.length);
     const onClick =
       direction === 'prev'
-        ? () => prevImage(projectIndex)
-        : () => nextImage(projectIndex);
+        ? () => prevImage(projectIndex, imagesDisplayed)
+        : () => nextImage(projectIndex, imagesDisplayed);
 
     return (
       <FlexContainer
@@ -223,7 +333,7 @@ const ProjectsSection: React.FC<IProps> = ({
     );
   }
 
-  function prevImage(projectIndex: number) {
+  function prevImage(projectIndex: number, imagesDisplayed: number) {
     const selection = { ...imgSelection };
     const current = --selection[projectIndex];
     if (current >= 0) {
@@ -231,7 +341,7 @@ const ProjectsSection: React.FC<IProps> = ({
     }
   }
 
-  function nextImage(projectIndex: number) {
+  function nextImage(projectIndex: number, imagesDisplayed: number) {
     const selection = { ...imgSelection };
     const current = ++selection[projectIndex];
     if (current < projects[projectIndex].images.length) {

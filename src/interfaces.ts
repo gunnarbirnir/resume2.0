@@ -107,6 +107,7 @@ export interface IJob extends IContentfulData {
 
 export interface IProject extends IContentfulData {
   title: string;
+  display: 'landscape' | 'portrait';
   description: {
     description: string;
   };
