@@ -9,6 +9,10 @@ interface IProps {
 }
 
 const useStyles = createUseStyles((theme: ITheme) => ({
+  text: {
+    fontSize: 18,
+    userSelect: 'none',
+  },
   selected: {
     fontWeight: 'bold',
     color: theme.colors.primary,
@@ -28,7 +32,7 @@ const LocaleSelector: React.FC<IProps> = ({ locale }) => {
 
   return (
     <div>
-      <p style={{ fontSize: 18 }}>
+      <p className={classes.text}>
         {renderLocaleItem('IS', localeIS)}
         {' / '}
         {renderLocaleItem('EN', !localeIS)}

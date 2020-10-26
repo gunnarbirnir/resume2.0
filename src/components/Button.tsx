@@ -18,6 +18,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     cursor: 'pointer',
     border: 'none',
     outline: 0,
+    userSelect: 'none',
     borderRadius: theme.dimensions.borderRadius,
     '&:hover': {
       backgroundColor: shadeColor(

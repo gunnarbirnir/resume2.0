@@ -13,7 +13,7 @@ import {
   ITheme,
   IBackgroundColor,
 } from '../interfaces';
-import { spacing } from '../utils';
+import { spacing, shadeColor } from '../utils';
 import useTheme from '../hooks/useTheme';
 import useWindowSize from '../hooks/useWindowSize';
 import useObjectSizes from '../hooks/useObjectSizes';
@@ -90,10 +90,11 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     '&:active': {
       transform: 'scale(1.1)',
     },
-  },
-  activeArrow: {
     '&:hover': {
-      opacity: 0.9,
+      backgroundColor: shadeColor(
+        theme.colors.primary,
+        theme.effects.hoverShade
+      ),
     },
   },
   dotContainer: {
@@ -286,7 +287,6 @@ const ProjectsSection: React.FC<IProps> = ({
         <RiArrowLeftSLine
           size={ARROW_SIZE}
           color={theme.colors.white}
-          className={cx({ [classes.activeArrow]: !disabled })}
           style={{
             transform:
               direction === 'next'

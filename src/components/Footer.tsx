@@ -38,6 +38,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     color: theme.colors.white,
     position: 'relative',
     cursor: 'pointer',
+    userSelect: 'none',
     '&:hover': {
       opacity: theme.effects.hoverOpacity,
     },
