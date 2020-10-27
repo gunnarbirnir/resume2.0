@@ -13,7 +13,7 @@ import {
   ITheme,
   IBackgroundColor,
 } from '../interfaces';
-import { spacing, shadeColor } from '../utils';
+import { spacing, shadeColor, getBackgroundColor } from '../utils';
 import useTheme from '../hooks/useTheme';
 import useWindowSize from '../hooks/useWindowSize';
 import useObjectSizes from '../hooks/useObjectSizes';
@@ -31,7 +31,6 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     position: 'relative',
     padding: spacing(3),
     marginBottom: spacing(2),
-    backgroundColor: theme.colors.lightGray,
     borderRadius: theme.dimensions.borderRadius,
     '&:not(:last-child)': {
       marginBottom: spacing(4),
@@ -155,6 +154,7 @@ const ProjectsSection: React.FC<IProps> = ({
         key={project.id}
         className={classes.project}
         style={{
+          backgroundColor: getBackgroundColor(background, true),
           flexDirection: xsDown ? 'column' : isOdd ? 'row-reverse' : 'row',
         }}
         data-sal="slide-up"

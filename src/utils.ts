@@ -81,7 +81,14 @@ export function scrollTo(id: string) {
   smoothScroll(`#${id}`);
 }
 
-export function getBackgroundColor(color: IBackgroundColor) {
+export function getBackgroundColor(
+  color: IBackgroundColor,
+  getOtherColor?: boolean
+) {
   const theme = useTheme();
+
+  if (getOtherColor) {
+    return color === 'white' ? theme.colors.lightGray : theme.colors.white;
+  }
   return color === 'white' ? theme.colors.white : theme.colors.lightGray;
 }
