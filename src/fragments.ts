@@ -14,12 +14,12 @@ export const query = graphql`
     }
     profilePicture {
       fluid(maxWidth: 180) {
-        ...GatsbyContentfulFluid
+        ...GatsbyContentfulFluid_withWebp
       }
     }
     backgroundImage {
       fluid {
-        ...GatsbyContentfulFluid
+        ...GatsbyContentfulFluid_withWebp
       }
     }
   }
@@ -61,8 +61,8 @@ export const query = graphql`
       description
     }
     images {
-      fluid {
-        ...GatsbyContentfulFluid
+      fluid(maxWidth: 630) {
+        ...GatsbyContentfulFluid_withWebp
       }
     }
   }
