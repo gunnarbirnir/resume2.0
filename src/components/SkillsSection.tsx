@@ -73,7 +73,7 @@ const SkillsSection: React.FC<IProps> = ({ skills, section, background }) => {
         key={skill.id}
         onChange={(visible) => !index && visible && setIsVisible(true)}
       >
-        <div className={classes.skill}>
+        <div className={classes.skill} title={`${skill.level}%`}>
           <p style={{ marginBottom: 4 }}>{skill.title}</p>
           <div className={classes.levelBackground}>
             <div
