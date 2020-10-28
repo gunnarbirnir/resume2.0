@@ -66,4 +66,12 @@ export const query = graphql`
       }
     }
   }
+
+  fragment Skill on ContentfulSkill {
+    id
+    node_locale
+    title
+    level
+    sortIndex
+  }
 `;

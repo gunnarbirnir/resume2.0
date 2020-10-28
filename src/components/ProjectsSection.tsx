@@ -73,10 +73,6 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   portraitImage: {
     margin: spacing(0, 1),
     position: 'relative',
-    backgroundPosition: '50% 0%',
-    backgroundSize: 'cover',
-    userSelect: 'none',
-    boxShadow: '0px 5px 10px 0px rgba(0,0,0,0.25)',
   },
   arrowContainer: {
     position: 'absolute',
@@ -221,14 +217,24 @@ const ProjectsSection: React.FC<IProps> = ({
       if (imgWidth < containerSize.width - widthUsed) {
         widthUsed += imgWidth;
         displayImgs.push((children: React.ReactNode) => (
-          <BackgroundImage
+          <div
             key={index}
-            fluid={img.fluid}
             className={classes.portraitImage}
-            style={{ width: imgWidth, height: imgHeight }}
+            style={{ width: imgWidth, maxHeight: imgHeight }}
           >
+            <Img
+              fluid={img.fluid}
+              style={{
+                boxShadow: '0px 5px 10px 0px rgba(0,0,0,0.25)',
+              }}
+              imgStyle={{
+                objectFit: 'contain',
+                objectPosition: '50% 0%',
+                userSelect: 'none',
+              }}
+            />
             {children}
-          </BackgroundImage>
+          </div>
         ));
       }
     });

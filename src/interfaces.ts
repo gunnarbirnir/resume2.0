@@ -16,6 +16,7 @@ export interface ITheme {
     mediumGray: string;
     mediumLightGray: string;
     lightGray: string;
+    backgroundGray: string;
   };
   breakpoints: {
     xs: number;
@@ -112,4 +113,10 @@ export interface IProject extends IContentfulData {
     description: string;
   };
   images: [{ fluid: FluidObject }];
+}
+
+export interface ISkill extends IContentfulData {
+  title: string;
+  level: number;
+  sortIndex: number;
 }

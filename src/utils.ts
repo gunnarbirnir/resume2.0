@@ -88,7 +88,15 @@ export function getBackgroundColor(
   const theme = useTheme();
 
   if (getOtherColor) {
-    return color === 'white' ? theme.colors.lightGray : theme.colors.white;
+    return color === 'white' ? theme.colors.backgroundGray : theme.colors.white;
   }
-  return color === 'white' ? theme.colors.white : theme.colors.lightGray;
+  return color === 'white' ? theme.colors.white : theme.colors.backgroundGray;
+}
+
+export function mediaQueryUp(size: number) {
+  return `@media (min-width: ${size}px)`;
+}
+
+export function mediaQueryDown(size: number) {
+  return `@media (max-width: ${size}px)`;
 }

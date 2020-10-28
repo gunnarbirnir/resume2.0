@@ -2307,6 +2307,13 @@
   dependencies:
     react-jss "*"
 
+"@types/react-visibility-sensor@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@types/react-visibility-sensor/-/react-visibility-sensor-5.1.0.tgz#10a4eace7cacf3c4dcb4ab1b5fbadb84acbd53df"
+  integrity sha512-7RaFo0tqqqC4uQtYpiulPIMxjxDPCp3ruxGQr5qxSJivDzhscdK1s9XgKHm9hdlVChTLO7CUgE6Jilw1whSs5g==
+  dependencies:
+    react-visibility-sensor "*"
+
 "@types/react@*":
   version "16.9.49"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.49.tgz#09db021cf8089aba0cdb12a49f8021a69cce4872"
@@ -12497,6 +12504,13 @@ react-typography@^0.16.19:
   version "0.16.19"
   resolved "https://registry.yarnpkg.com/react-typography/-/react-typography-0.16.19.tgz#5736b47961dcf6b9605b6fa38d41980db2588e28"
   integrity sha512-kV2qLEsdm0x9P4YXQEDVc88tDb4Vg0h/vdVZGgbqaRn8ERvNzV76JHUeOby3vvcUYU5MPd5Kz5DPH9Bhp4I/iw==
+
+react-visibility-sensor@*, react-visibility-sensor@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/react-visibility-sensor/-/react-visibility-sensor-5.1.1.tgz#5238380960d3a0b2be0b7faddff38541e337f5a9"
+  integrity sha512-cTUHqIK+zDYpeK19rzW6zF9YfT4486TIgizZW53wEZ+/GPBbK7cNS0EHyJVyHYacwFEvvHLEKfgJndbemWhB/w==
+  dependencies:
+    prop-types "^15.7.2"
 
 react@15:
   version "15.6.2"

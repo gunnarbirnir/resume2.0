@@ -3,7 +3,8 @@ const grays = {
   mediumDarkGray: '#525252',
   mediumGray: '#696969',
   mediumLightGray: '#9e9e9e',
-  lightGray: '#fafafa',
+  lightGray: '#c7c7c7',
+  backgroundGray: '#fafafa',
 };
 
 const breakpoints = {

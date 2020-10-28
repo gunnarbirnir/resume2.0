@@ -1,15 +1,101 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { createUseStyles } from 'react-jss';
+import VisibilitySensor from 'react-visibility-sensor';
 
 import Section from './Section';
-import { IScrollSection, IBackgroundColor } from '../interfaces';
+import FlexContainer from './FlexContainer';
+import {
+  ISkill,
+  IScrollSection,
+  IBackgroundColor,
+  ITheme,
+} from '../interfaces';
+import { spacing, mediaQueryDown } from '../utils';
+
+const useStyles = createUseStyles((theme: ITheme) => ({
+  skill: {
+    width: '30%',
+    marginBottom: spacing(3),
+    [theme.mediaQueries.xsDown]: {
+      width: '47%',
+    },
+    [mediaQueryDown(350)]: {
+      width: '100%',
+    },
+  },
+  levelBackground: {
+    width: '100%',
+    height: 18,
+    backgroundColor: theme.colors.lightGray,
+    borderRadius: 10,
+    position: 'relative',
+  },
+  level: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: '100%',
+    backgroundColor: theme.colors.primary,
+    borderRadius: 10,
+    transition: 'width 500ms',
+    transitionDelay: '500ms',
+  },
+}));
 
 interface IProps {
+  skills: ISkill[];
   section: IScrollSection;
   background: IBackgroundColor;
 }
 
-const SkillsSection: React.FC<IProps> = ({ section, background }) => {
-  return <Section section={section} background={background} />;
+const SkillsSection: React.FC<IProps> = ({ skills, section, background }) => {
+  const classes = useStyles();
+  const [isVisible, setIsVisible] = useState(false);
+
+  return (
+    <Section section={section} background={background}>
+      <FlexContainer
+        direction="row"
+        wrap="wrap"
+        justifyContent="space-between"
+        style={{ width: '100%' }}
+        data-sal="slide-up"
+        data-sal-duration="500"
+      >
+        {skills.sort(sortSkills).map(renderSkillItem)}
+      </FlexContainer>
+    </Section>
+  );
+
+  function renderSkillItem(skill: ISkill, index: number) {
+    return (
+      <VisibilitySensor
+        key={skill.id}
+        onChange={(visible) => !index && visible && setIsVisible(true)}
+      >
+        <div className={classes.skill}>
+          <p style={{ marginBottom: 4 }}>{skill.title}</p>
+          <div className={classes.levelBackground}>
+            <div
+              className={classes.level}
+              style={{
+                width: isVisible ? `${skill.level}%` : 0,
+                borderTopRightRadius: skill.level > 95 ? 10 : 0,
+                borderBottomRightRadius: skill.level > 95 ? 10 : 0,
+              }}
+            />
+          </div>
+        </div>
+      </VisibilitySensor>
+    );
+  }
+
+  function sortSkills(a: ISkill, b: ISkill) {
+    if (a.level === b.level) {
+      return a.sortIndex - b.sortIndex;
+    }
+    return b.level - a.level;
+  }
 };
 
 export default SkillsSection;

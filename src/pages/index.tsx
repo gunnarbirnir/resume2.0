@@ -15,6 +15,7 @@ import {
   IPageLayout,
   IJob,
   IProject,
+  ISkill,
 } from '../interfaces';
 import { getLocale, getFirstOfLocale, getAllForLocale } from '../utils';
 import useObjectSize from '../hooks/useObjectSize';
@@ -32,6 +33,9 @@ interface IProps extends IPageProps {
     };
     allContentfulProject: {
       edges: IEdges<IProject>;
+    };
+    allContentfulSkill: {
+      edges: IEdges<ISkill>;
     };
   };
 }
@@ -54,6 +58,7 @@ const ResumePage: React.FC<IProps> = ({ data, location }) => {
     : [];
   const jobs = getAllForLocale(data.allContentfulJob.edges, locale);
   const projects = getAllForLocale(data.allContentfulProject.edges, locale);
+  const skills = getAllForLocale(data.allContentfulSkill.edges, locale);
 
   return (
     <Layout
@@ -100,6 +105,7 @@ const ResumePage: React.FC<IProps> = ({ data, location }) => {
           return (
             <SkillsSection
               key={section.id}
+              skills={skills}
               section={section}
               background={background}
             />
@@ -152,6 +158,13 @@ export const query = graphql`
       edges {
         node {
           ...Project
+        }
+      }
+    }
+    allContentfulSkill {
+      edges {
+        node {
+          ...Skill
         }
       }
     }
