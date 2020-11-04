@@ -3,7 +3,6 @@ import { createUseStyles } from 'react-jss';
 
 import { ITheme, IScrollSection, IBackgroundColor } from '../interfaces';
 import { spacing, getBackgroundColor } from '../utils';
-import useTheme from '../hooks/useTheme';
 
 interface IProps {
   section: IScrollSection;

@@ -15,7 +15,7 @@ import { spacing, mediaQueryDown } from '../utils';
 const useStyles = createUseStyles((theme: ITheme) => ({
   skill: {
     width: '30%',
-    marginBottom: spacing(3),
+    marginBottom: spacing(4),
     [theme.mediaQueries.xsDown]: {
       width: '47%',
     },
@@ -25,7 +25,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
   },
   levelBackground: {
     width: '100%',
-    height: 18,
+    height: 15,
     backgroundColor: theme.colors.lightGray,
     borderRadius: 10,
     position: 'relative',
@@ -74,7 +74,7 @@ const SkillsSection: React.FC<IProps> = ({ skills, section, background }) => {
         onChange={(visible) => !index && visible && setIsVisible(true)}
       >
         <div className={classes.skill} title={`${skill.level}%`}>
-          <p style={{ marginBottom: 4 }}>{skill.title}</p>
+          <p style={{ marginBottom: 5 }}>{skill.title}</p>
           <div className={classes.levelBackground}>
             <div
               className={classes.level}

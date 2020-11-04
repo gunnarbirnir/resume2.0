@@ -37,6 +37,7 @@ export interface ITheme {
   dimensions: {
     contentWidth: number;
     borderRadius: number;
+    borderRadiusLg: number;
     navbarHeight: number;
   };
   effects: {
@@ -119,4 +120,14 @@ export interface ISkill extends IContentfulData {
   title: string;
   level: number;
   sortIndex: number;
+}
+
+export interface IAccolade extends IContentfulData {
+  title: string;
+  description: {
+    description: string;
+  };
+  image?: {
+    fluid: FluidObject;
+  };
 }

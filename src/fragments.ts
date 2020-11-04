@@ -74,4 +74,18 @@ export const query = graphql`
     level
     sortIndex
   }
+
+  fragment Accolade on ContentfulAccolade {
+    id
+    node_locale
+    title
+    description {
+      description
+    }
+    image {
+      fluid(maxWidth: 1000) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
+  }
 `;

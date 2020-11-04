@@ -16,6 +16,7 @@ import {
   IJob,
   IProject,
   ISkill,
+  IAccolade,
 } from '../interfaces';
 import { getLocale, getFirstOfLocale, getAllForLocale } from '../utils';
 import useObjectSize from '../hooks/useObjectSize';
@@ -36,6 +37,9 @@ interface IProps extends IPageProps {
     };
     allContentfulSkill: {
       edges: IEdges<ISkill>;
+    };
+    allContentfulAccolade: {
+      edges: IEdges<IAccolade>;
     };
   };
 }
@@ -59,6 +63,7 @@ const ResumePage: React.FC<IProps> = ({ data, location }) => {
   const jobs = getAllForLocale(data.allContentfulJob.edges, locale);
   const projects = getAllForLocale(data.allContentfulProject.edges, locale);
   const skills = getAllForLocale(data.allContentfulSkill.edges, locale);
+  const accolades = getAllForLocale(data.allContentfulAccolade.edges, locale);
 
   return (
     <Layout
@@ -114,6 +119,7 @@ const ResumePage: React.FC<IProps> = ({ data, location }) => {
           return (
             <AccoladesSection
               key={section.id}
+              accolades={accolades}
               section={section}
               background={background}
             />
@@ -165,6 +171,13 @@ export const query = graphql`
       edges {
         node {
           ...Skill
+        }
+      }
+    }
+    allContentfulAccolade(sort: { fields: date }) {
+      edges {
+        node {
+          ...Accolade
         }
       }
     }

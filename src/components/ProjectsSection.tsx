@@ -31,7 +31,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     position: 'relative',
     padding: spacing(3),
     marginBottom: spacing(2),
-    borderRadius: theme.dimensions.borderRadius,
+    borderRadius: theme.dimensions.borderRadiusLg,
     '&:not(:last-child)': {
       marginBottom: spacing(4),
     },

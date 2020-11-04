@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import Img from 'gatsby-image';
 import cx from 'classnames';

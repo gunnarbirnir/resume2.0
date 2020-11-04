@@ -36,6 +36,7 @@ module.exports = {
   dimensions: {
     contentWidth: 900,
     borderRadius: 4,
+    borderRadiusLg: 8,
     navbarHeight: 48,
   },
   effects: {
