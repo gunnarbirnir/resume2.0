@@ -3,6 +3,7 @@ import { createUseStyles } from 'react-jss';
 import { navigate } from 'gatsby';
 
 import { ILocale, ITheme } from '../interfaces';
+import useGlobalStyles from '../hooks/useGlobalStyles';
 
 interface IProps {
   locale: ILocale;
@@ -28,10 +29,11 @@ const useStyles = createUseStyles((theme: ITheme) => ({
 
 const LocaleSelector: React.FC<IProps> = ({ locale }) => {
   const classes = useStyles();
+  const global = useGlobalStyles();
   const localeIS = locale === 'is';
 
   return (
-    <div>
+    <div className={global.hidePdf}>
       <p className={classes.text}>
         {renderLocaleItem('IS', localeIS)}
         {' / '}

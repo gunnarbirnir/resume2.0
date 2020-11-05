@@ -38,7 +38,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     backgroundColor: theme.colors.primary,
     borderRadius: 10,
     transition: 'width 500ms',
-    transitionDelay: '500ms',
+    transitionDelay: '700ms',
   },
 }));
 

@@ -4,7 +4,7 @@ import { createUseStyles } from 'react-jss';
 import Section from './Section';
 import FlexContainer from './FlexContainer';
 import { IScrollSection, IJob, ITheme, IBackgroundColor } from '../interfaces';
-import { spacing, getBackgroundColor } from '../utils';
+import { spacing } from '../utils';
 
 interface IProps {
   jobs: IJob[];
@@ -52,6 +52,7 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     height: MARKER_SIZE,
     width: MARKER_SIZE,
     borderRadius: '50%',
+    backgroundColor: theme.colors.white,
     border: `4px solid ${theme.colors.primary}`,
     [theme.mediaQueries.xsDown]: {
       marginLeft: 0,
@@ -80,10 +81,7 @@ const WorkSection: React.FC<IProps> = ({ jobs, section, background }) => {
               <p key={job.id} className={classes.years}>
                 {getYearsString(job)}
               </p>
-              <div
-                className={classes.marker}
-                style={{ backgroundColor: getBackgroundColor(background) }}
-              />
+              <div className={classes.marker} />
             </FlexContainer>
             <div
               style={{

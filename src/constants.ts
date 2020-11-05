@@ -1,0 +1,1 @@
+export const PDF_MODE = process.env.GATSBY_PDF_MODE === "true";
