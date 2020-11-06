@@ -13,8 +13,8 @@ function useObjectSizes(myRefs: React.RefObject<any>[]) {
       const newSizes: { width: number; height: number }[] = [];
       myRefs.forEach((ref) =>
         newSizes.push({
-          width: ref.current.offsetWidth,
-          height: ref.current.offsetHeight,
+          width: ref.current ? ref.current.offsetWidth : 0,
+          height: ref.current ? ref.current.offsetHeight : 0,
         })
       );
       setObjectSizes(newSizes);

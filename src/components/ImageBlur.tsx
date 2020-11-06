@@ -1,7 +1,7 @@
 import React from 'react';
-import { browserName } from 'react-device-detect';
 
 interface IProps {
+  id: string;
   src: string;
   containerHeight: string;
   containerWidth: string;
@@ -31,7 +31,7 @@ class ImageBlur extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { src, containerHeight, containerWidth } = this.props;
+    const { id, src, containerHeight, containerWidth } = this.props;
     const { imgLoaded } = this.state;
 
     return (
@@ -55,7 +55,7 @@ class ImageBlur extends React.Component<IProps, IState> {
             height="100%"
             xlinkHref={src}
             preserveAspectRatio="xMidYMid slice"
-            filter="url(#blur)"
+            filter={`url(#${id}-blur)`}
             // onLoad={this.setLoaded}
           />
           {this.renderColorOverlay()}
@@ -65,11 +65,12 @@ class ImageBlur extends React.Component<IProps, IState> {
   }
 
   renderFilters() {
-    const { positions } = this.props;
+    const { id, positions } = this.props;
+
     return (
       <defs>
         <filter
-          id="blur"
+          id={`${id}-blur`}
           x="0"
           y="0"
           height="100%"
@@ -111,6 +112,7 @@ class ImageBlur extends React.Component<IProps, IState> {
 
   renderColorOverlay() {
     const { positions } = this.props;
+
     return positions.map((pos, index) => (
       <rect
         x={pos.x || '0'}

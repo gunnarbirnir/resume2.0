@@ -6,11 +6,12 @@ import SEO, { IProps as SEOProps } from './SEO';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { spacing, scrollTo } from '../utils';
-import { ILocale, IScrollSection } from '../interfaces';
+import { ILocale, IScrollSection, IPersonalInfo } from '../interfaces';
 import useWindowSize from '../hooks/useWindowSize';
 import useObjectSize from '../hooks/useObjectSize';
 
 interface IProps {
+  info: IPersonalInfo | null;
   locale: ILocale;
   seo?: Partial<SEOProps>;
   padding?: boolean;
@@ -42,6 +43,7 @@ const useStyles = createUseStyles({
 
 const Layout: React.FC<IProps> = ({
   children,
+  info,
   locale,
   seo,
   padding = true,
@@ -64,7 +66,11 @@ const Layout: React.FC<IProps> = ({
         {children}
       </div>
       {!hideFooter && (
-        <Footer locale={locale} scrollToTop={() => scrollTo(CONTAINER_ID)} />
+        <Footer
+          info={info}
+          locale={locale}
+          scrollToTop={() => scrollTo(CONTAINER_ID)}
+        />
       )}
     </div>
   );

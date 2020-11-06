@@ -73,6 +73,7 @@ const ResumePage: React.FC<IProps> = ({ data, location }) => {
 
   return (
     <Layout
+      info={info}
       locale={locale}
       padding={false}
       pageSections={pageSections}

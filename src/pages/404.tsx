@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 
 const NotFoundPage: React.FC = () => {
   return (
-    <Layout locale="en-US" seo={{ title: 'Page not found' }}>
+    <Layout info={null} locale="en-US" seo={{ title: 'Page not found' }}>
       <h1>404 Page not found</h1>
     </Layout>
   );

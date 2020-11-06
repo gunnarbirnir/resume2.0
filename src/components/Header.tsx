@@ -167,6 +167,7 @@ const Header: React.FC<IProps> = ({
         style={{ height: backgroundHeight, width: backgroundWidth }}
       >
         <ImageBlur
+          id="header"
           src={info.backgroundImage.fluid.src}
           containerHeight={`${backgroundHeight}px`}
           containerWidth={`${backgroundWidth}px`}

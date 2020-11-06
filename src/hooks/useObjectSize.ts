@@ -9,8 +9,8 @@ function useObjectSize(myRef: React.RefObject<any>) {
   useEffect(() => {
     function handleResize() {
       setObjectSize({
-        width: myRef.current.offsetWidth,
-        height: myRef.current.offsetHeight,
+        width: myRef.current ? myRef.current.offsetWidth : 0,
+        height: myRef.current ? myRef.current.offsetHeight : 0,
       });
     }
 
