@@ -76,15 +76,13 @@ const Footer: React.FC<IProps> = ({ info, locale, scrollToTop }) => {
           </div>
         </FlexContainer>
       </div>
-      <div style={{ position: 'relative', height: 18, width: '100%' }}>
-        <ImageBlur
-          id="footer"
-          src={info.backgroundImage.fluid.src}
-          containerHeight="18px"
-          containerWidth="100%"
-          positions={[{ width: '100%', height: '100%' }]}
-        />
-      </div>
+      <ImageBlur
+        id="footer"
+        src={info.backgroundImage.fluid.src}
+        containerHeight="10px"
+        containerWidth="100%"
+        positions={[{ width: '100%', height: '100%' }]}
+      />
     </React.Fragment>
   );
 };

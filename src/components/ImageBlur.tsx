@@ -37,15 +37,17 @@ class ImageBlur extends React.Component<IProps, IState> {
     return (
       <div
         style={{
-          position: 'absolute',
-          top: 0,
-          bottom: 0,
-          width: '100%',
           opacity: imgLoaded ? 1 : 0,
           transition: 'opacity 500ms',
         }}
       >
-        <svg x="0" y="0" width={containerWidth} height={containerHeight}>
+        <svg
+          x="0"
+          y="0"
+          width={containerWidth}
+          height={containerHeight}
+          style={{ display: 'block' }}
+        >
           {this.renderFilters()}
           <image
             x="0"
