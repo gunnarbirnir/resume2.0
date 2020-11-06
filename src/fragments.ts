@@ -88,4 +88,17 @@ export const query = graphql`
       }
     }
   }
+
+  fragment Reference on ContentfulReference {
+    id
+    node_locale
+    name
+    email
+    jobTitle
+    image {
+      fluid(maxWidth: 180) {
+        ...GatsbyContentfulFluid_withWebp
+      }
+    }
+  }
 `;

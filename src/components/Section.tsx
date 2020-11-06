@@ -11,7 +11,6 @@ interface IProps {
 
 const useStyles = createUseStyles((theme: ITheme) => ({
   container: {
-    minHeight: 500,
     padding: spacing(3),
     paddingTop: spacing(4),
     paddingBottom: spacing(6),

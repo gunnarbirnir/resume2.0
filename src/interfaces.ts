@@ -131,3 +131,12 @@ export interface IAccolade extends IContentfulData {
     fluid: FluidObject;
   };
 }
+
+export interface IReference extends IContentfulData {
+  name: string;
+  email: string;
+  jobTitle: string;
+  image: {
+    fluid: FluidObject;
+  };
+}

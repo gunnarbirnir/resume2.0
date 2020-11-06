@@ -17,6 +17,7 @@ import {
   IProject,
   ISkill,
   IAccolade,
+  IReference,
 } from '../interfaces';
 import { getLocale, getFirstOfLocale, getAllForLocale } from '../utils';
 import useObjectSize from '../hooks/useObjectSize';
@@ -41,6 +42,9 @@ interface IProps extends IPageProps {
     allContentfulAccolade: {
       edges: IEdges<IAccolade>;
     };
+    allContentfulReference: {
+      edges: IEdges<IReference>;
+    };
   };
 }
 
@@ -60,10 +64,12 @@ const ResumePage: React.FC<IProps> = ({ data, location }) => {
         scrollId: `${section.component}-${section.id}`,
       }))
     : [];
+
   const jobs = getAllForLocale(data.allContentfulJob.edges, locale);
   const projects = getAllForLocale(data.allContentfulProject.edges, locale);
   const skills = getAllForLocale(data.allContentfulSkill.edges, locale);
   const accolades = getAllForLocale(data.allContentfulAccolade.edges, locale);
+  const references = getAllForLocale(data.allContentfulReference.edges, locale);
 
   return (
     <Layout
@@ -128,6 +134,7 @@ const ResumePage: React.FC<IProps> = ({ data, location }) => {
           return (
             <ReferencesSection
               key={section.id}
+              references={references}
               section={section}
               background={background}
             />
@@ -178,6 +185,13 @@ export const query = graphql`
       edges {
         node {
           ...Accolade
+        }
+      }
+    }
+    allContentfulReference(sort: { fields: sortIndex }) {
+      edges {
+        node {
+          ...Reference
         }
       }
     }
