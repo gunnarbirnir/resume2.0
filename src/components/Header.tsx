@@ -13,8 +13,10 @@ import LocaleSelector from '../components/LocaleSelector';
 import ImageBlur from '../components/ImageBlur';
 import { IPersonalInfo, ILocale, ITheme, IScrollSection } from '../interfaces';
 import { spacing, scrollTo } from '../utils';
+import { PDF_MODE } from '../constants';
 import useWindowSize from '../hooks/useWindowSize';
 import useTheme from '../hooks/useTheme';
+import useGlobalStyles from '../hooks/useGlobalStyles';
 
 interface IProps {
   info: IPersonalInfo | null;
@@ -148,6 +150,7 @@ const Header: React.FC<IProps> = ({
   contentSize,
 }) => {
   const classes = useStyles();
+  const global = useGlobalStyles();
   const theme = useTheme();
   const windowSize = useWindowSize();
   const [disableArrowAnimation, setDisableArrowAnimation] = useState(false);
@@ -217,7 +220,9 @@ const Header: React.FC<IProps> = ({
                   Icon={IoLogoFacebook}
                 />
               </FlexContainer>
-              <p style={{ marginBottom: spacing(3) }}>{info.about.about}</p>
+              <p style={{ marginBottom: PDF_MODE ? 0 : spacing(3) }}>
+                {info.about.about}
+              </p>
               {pageSections.map(renderButton)}
             </div>
           </div>
@@ -226,7 +231,7 @@ const Header: React.FC<IProps> = ({
         {displayArrow && (
           <FlexContainer
             justifyContent="center"
-            className={classes.arrowContainer}
+            className={cx(classes.arrowContainer, global.hidePdf)}
           >
             <RiArrowDownSLine
               size={50}
@@ -283,7 +288,7 @@ const Header: React.FC<IProps> = ({
       <Button
         key={section.id}
         size="small"
-        className={classes.button}
+        className={cx(classes.button, global.hidePdf)}
         onClick={() => scrollTo(section.scrollId)}
       >
         {section.title}

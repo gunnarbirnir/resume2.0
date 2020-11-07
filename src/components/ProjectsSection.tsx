@@ -17,6 +17,7 @@ import { spacing, shadeColor, getBackgroundColor } from '../utils';
 import useTheme from '../hooks/useTheme';
 import useWindowSize from '../hooks/useWindowSize';
 import useObjectSizes from '../hooks/useObjectSizes';
+import useGlobalStyles from '../hooks/useGlobalStyles';
 
 interface IProps {
   projects: IProject[];
@@ -119,6 +120,7 @@ const ProjectsSection: React.FC<IProps> = ({
   background,
 }) => {
   const classes = useStyles();
+  const global = useGlobalStyles();
   const theme = useTheme();
   const windowSize = useWindowSize();
   const xsDown = windowSize.width <= theme.breakpoints.xs;
@@ -274,7 +276,7 @@ const ProjectsSection: React.FC<IProps> = ({
       <FlexContainer
         justifyContent="center"
         alignItems="center"
-        className={cx(classes.arrowContainer, {
+        className={cx(classes.arrowContainer, global.hidePdf, {
           [classes.activeArrowContainer]: !disabled,
         })}
         style={
@@ -326,7 +328,7 @@ const ProjectsSection: React.FC<IProps> = ({
         direction="row"
         justifyContent="center"
         alignItems="flex-end"
-        className={classes.dotContainer}
+        className={cx(classes.dotContainer, global.hidePdf)}
       >
         {dots}
       </FlexContainer>

@@ -5,7 +5,7 @@ import { PDF_MODE } from '../constants';
 
 const globalStyles = createUseStyles((theme: ITheme) => ({
   hidePdf: {
-    display: PDF_MODE ? 'none' : 'block'
+    display: PDF_MODE ? 'none !important' : '',
   },
 }));
 

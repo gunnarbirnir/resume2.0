@@ -6,6 +6,7 @@ import FlexContainer from './FlexContainer';
 import ImageBlur from '../components/ImageBlur';
 import { IPersonalInfo, ITheme, ILocale } from '../interfaces';
 import { spacing } from '../utils';
+import { PDF_MODE } from '../constants';
 import useTheme from '../hooks/useTheme';
 import translations from '../../assets/json/translations.json';
 
@@ -66,20 +67,28 @@ const Footer: React.FC<IProps> = ({ info, locale, scrollToTop }) => {
       <div className={classes.container}>
         <FlexContainer className={classes.content}>
           <p className={classes.name}>{info.name}</p>
-          <div className={classes.backToTop} onClick={scrollToTop}>
-            <p style={{ marginRight: 40 }}>{translations.backToTop[locale]}</p>
-            <RiArrowUpSLine
-              size={50}
-              className={classes.arrow}
-              color={theme.colors.white}
-            />
-          </div>
+          {PDF_MODE ? (
+            <p style={{ color: theme.colors.white }}>
+              {translations.url[locale]}
+            </p>
+          ) : (
+            <div className={classes.backToTop} onClick={scrollToTop}>
+              <p style={{ marginRight: 40 }}>
+                {translations.backToTop[locale]}
+              </p>
+              <RiArrowUpSLine
+                size={50}
+                className={classes.arrow}
+                color={theme.colors.white}
+              />
+            </div>
+          )}
         </FlexContainer>
       </div>
       <ImageBlur
         id="footer"
         src={info.backgroundImage.fluid.src}
-        containerHeight="10px"
+        containerHeight="15px"
         containerWidth="100%"
         positions={[{ width: '100%', height: '100%' }]}
       />
