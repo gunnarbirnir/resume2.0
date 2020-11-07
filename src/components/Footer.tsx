@@ -8,6 +8,7 @@ import { IPersonalInfo, ITheme, ILocale } from '../interfaces';
 import { spacing } from '../utils';
 import { PDF_MODE } from '../constants';
 import useTheme from '../hooks/useTheme';
+import useWindowSize from '../hooks/useWindowSize';
 import translations from '../../assets/json/translations.json';
 
 interface IProps {
@@ -57,6 +58,8 @@ const useStyles = createUseStyles((theme: ITheme) => ({
 const Footer: React.FC<IProps> = ({ info, locale, scrollToTop }) => {
   const classes = useStyles();
   const theme = useTheme();
+  const windowSize = useWindowSize();
+  const xsDown = windowSize.width <= theme.breakpoints.xs;
 
   if (!info) {
     return null;
@@ -88,7 +91,7 @@ const Footer: React.FC<IProps> = ({ info, locale, scrollToTop }) => {
       <ImageBlur
         id="footer"
         src={info.backgroundImage.fluid.src}
-        containerHeight="15px"
+        containerHeight={xsDown ? '30px' : '15px'}
         containerWidth="100%"
         positions={[{ width: '100%', height: '100%' }]}
       />
