@@ -277,7 +277,7 @@ const Header: React.FC<IProps> = ({
             {text}
           </a>
         ) : (
-          <p style={{ color: theme.colors.textSecondary }}>{text}</p>
+          <p>{text}</p>
         )}
       </FlexContainer>
     );

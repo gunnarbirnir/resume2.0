@@ -1,6 +1,6 @@
 const grays = {
   darkGray: '#2e2e2e',
-  mediumDarkGray: '#525252',
+  mediumDarkGray: '#4c4c4c',
   mediumGray: '#696969',
   mediumLightGray: '#9e9e9e',
   lightGray: '#c7c7c7',
