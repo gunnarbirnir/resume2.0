@@ -1,5 +1,6 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
+import ReactMarkdown from 'react-markdown';
 
 import Section from './Section';
 import FlexContainer from './FlexContainer';
@@ -74,7 +75,7 @@ const WorkSection: React.FC<IProps> = ({ jobs, section, background }) => {
 
   return (
     <Section section={section} background={background}>
-      <div style={{ maxWidth: 865, margin: '0px auto' }}>
+      <div style={{ maxWidth: 812, margin: '0px auto' }}>
         {jobs.map((job, index) => (
           <FlexContainer key={job.id} direction="row" alignItems="flex-start">
             <FlexContainer direction="row" alignItems="center">
@@ -106,7 +107,7 @@ const WorkSection: React.FC<IProps> = ({ jobs, section, background }) => {
                   </span>
                   {job.jobTitle}
                 </p>
-                <p>{job.description.description}</p>
+                <ReactMarkdown>{job.description.description}</ReactMarkdown>
               </div>
               {index < jobs.length - 1 && <div className={classes.line} />}
             </div>

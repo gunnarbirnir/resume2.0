@@ -3,6 +3,7 @@ import { createUseStyles } from 'react-jss';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import Img, { FluidObject } from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
+import ReactMarkdown from 'react-markdown';
 import cx from 'classnames';
 
 import Section from './Section';
@@ -194,7 +195,7 @@ const ProjectsSection: React.FC<IProps> = ({
         </div>
         <div style={{ flex: 1 }}>
           <h3 className={classes.title}>{project.title}</h3>
-          <p>{project.description.description}</p>
+          <ReactMarkdown>{project.description.description}</ReactMarkdown>
         </div>
       </FlexContainer>
     );

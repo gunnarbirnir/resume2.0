@@ -6,6 +6,7 @@ import { IconType } from 'react-icons';
 import { IoMdMail, IoLogoFacebook } from 'react-icons/io';
 import { FaPhone } from 'react-icons/fa';
 import { RiArrowDownSLine } from 'react-icons/ri';
+import ReactMarkdown from 'react-markdown';
 
 import Button from './Button';
 import FlexContainer from './FlexContainer';
@@ -26,7 +27,7 @@ interface IProps {
 }
 
 const PROFILE_PIC_SIZE = 180;
-const CONTENT_WIDTH = 800;
+const CONTENT_WIDTH = 750;
 const SIDE_PADDING = 32;
 
 const useStyles = createUseStyles((theme: ITheme) => ({
@@ -220,9 +221,9 @@ const Header: React.FC<IProps> = ({
                   Icon={IoLogoFacebook}
                 />
               </FlexContainer>
-              <p style={{ marginBottom: PDF_MODE ? 0 : spacing(3) }}>
-                {info.about.about}
-              </p>
+              <div style={{ marginBottom: PDF_MODE ? 0 : spacing(3) }}>
+                <ReactMarkdown>{info.about.about}</ReactMarkdown>
+              </div>
               {pageSections.map(renderButton)}
             </div>
           </div>

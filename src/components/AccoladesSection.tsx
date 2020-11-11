@@ -3,6 +3,7 @@ import { createUseStyles } from 'react-jss';
 import BackgroundImage from 'gatsby-background-image';
 import { FluidObject } from 'gatsby-image';
 import { IoIosTrophy } from 'react-icons/io';
+import ReactMarkdown from 'react-markdown';
 
 import Section from './Section';
 import FlexContainer from './FlexContainer';
@@ -101,7 +102,7 @@ const AccoladesSection: React.FC<IProps> = ({
           />
           <h3 style={{ fontSize: '1.2rem' }}>{accolade.title}</h3>
         </FlexContainer>
-        <p>{accolade.description.description}</p>
+        <ReactMarkdown>{accolade.description.description}</ReactMarkdown>
       </div>
     );
   }
