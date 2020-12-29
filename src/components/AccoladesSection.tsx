@@ -14,6 +14,7 @@ import {
   ITheme,
 } from '../interfaces';
 import { spacing, hexToRgba, mediaQueryDown } from '../utils';
+import { SLIDE_UP_ANIMATION, SLIDE_UP_DURATION } from '../constants';
 import useTheme from '../hooks/useTheme';
 
 interface IProps {
@@ -87,8 +88,8 @@ const AccoladesSection: React.FC<IProps> = ({
       <div
         key={accolade.id}
         className={classes.accolade}
-        data-sal="slide-up"
-        data-sal-duration="500"
+        data-sal={SLIDE_UP_ANIMATION}
+        data-sal-duration={SLIDE_UP_DURATION}
       >
         <FlexContainer
           direction="row"

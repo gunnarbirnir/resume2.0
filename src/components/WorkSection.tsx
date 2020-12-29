@@ -6,6 +6,7 @@ import Section from './Section';
 import FlexContainer from './FlexContainer';
 import { IScrollSection, IJob, ITheme, IBackgroundColor } from '../interfaces';
 import { spacing } from '../utils';
+import { SLIDE_UP_ANIMATION, SLIDE_UP_DURATION } from '../constants';
 
 interface IProps {
   jobs: IJob[];
@@ -90,7 +91,10 @@ const WorkSection: React.FC<IProps> = ({ jobs, section, background }) => {
                 position: 'relative',
               }}
             >
-              <div data-sal="slide-up" data-sal-duration="500">
+              <div
+                data-sal={SLIDE_UP_ANIMATION}
+                data-sal-duration={SLIDE_UP_DURATION}
+              >
                 <a
                   href={job.website}
                   target="_blank"

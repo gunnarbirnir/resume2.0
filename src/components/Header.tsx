@@ -14,7 +14,7 @@ import LocaleSelector from '../components/LocaleSelector';
 import ImageBlur from '../components/ImageBlur';
 import { IPersonalInfo, ILocale, ITheme, IScrollSection } from '../interfaces';
 import { spacing, scrollTo } from '../utils';
-import { PDF_MODE } from '../constants';
+import { PDF_MODE, SLIDE_UP_ANIMATION, SLIDE_UP_DURATION } from '../constants';
 import useWindowSize from '../hooks/useWindowSize';
 import useTheme from '../hooks/useTheme';
 import useGlobalStyles from '../hooks/useGlobalStyles';
@@ -188,8 +188,8 @@ const Header: React.FC<IProps> = ({
         <div className={cx(classes.flexContainer, classes.contentContainer)}>
           <div
             className={classes.content}
-            data-sal="slide-up"
-            data-sal-duration="500"
+            data-sal={SLIDE_UP_ANIMATION}
+            data-sal-duration={SLIDE_UP_DURATION}
           >
             <Img
               fluid={info.profilePicture.fluid}

@@ -15,6 +15,7 @@ import {
   IBackgroundColor,
 } from '../interfaces';
 import { spacing, shadeColor, getBackgroundColor } from '../utils';
+import { SLIDE_UP_ANIMATION, SLIDE_UP_DURATION } from '../constants';
 import useTheme from '../hooks/useTheme';
 import useWindowSize from '../hooks/useWindowSize';
 import useObjectSizes from '../hooks/useObjectSizes';
@@ -160,8 +161,8 @@ const ProjectsSection: React.FC<IProps> = ({
           backgroundColor: getBackgroundColor(background, true),
           flexDirection: xsDown ? 'column' : isOdd ? 'row-reverse' : 'row',
         }}
-        data-sal="slide-up"
-        data-sal-duration="500"
+        data-sal={SLIDE_UP_ANIMATION}
+        data-sal-duration={SLIDE_UP_DURATION}
       >
         <div
           className={classes.imageArea}

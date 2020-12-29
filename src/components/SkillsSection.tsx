@@ -11,6 +11,7 @@ import {
   ITheme,
 } from '../interfaces';
 import { spacing, mediaQueryDown } from '../utils';
+import { SLIDE_UP_ANIMATION, SLIDE_UP_DURATION } from '../constants';
 
 const useStyles = createUseStyles((theme: ITheme) => ({
   skill: {
@@ -59,8 +60,8 @@ const SkillsSection: React.FC<IProps> = ({ skills, section, background }) => {
         wrap="wrap"
         justifyContent="space-between"
         style={{ width: '100%' }}
-        data-sal="slide-up"
-        data-sal-duration="500"
+        data-sal={SLIDE_UP_ANIMATION}
+        data-sal-duration={SLIDE_UP_DURATION}
       >
         {skills.sort(sortSkills).map(renderSkillItem)}
       </FlexContainer>

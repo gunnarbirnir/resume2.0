@@ -11,6 +11,7 @@ import {
   ITheme,
 } from '../interfaces';
 import { spacing } from '../utils';
+import { SLIDE_UP_ANIMATION, SLIDE_UP_DURATION } from '../constants';
 import useTheme from '../hooks/useTheme';
 import useWindowSize from '../hooks/useWindowSize';
 
@@ -74,8 +75,8 @@ const ReferencesSection: React.FC<IProps> = ({
             key={reference.id}
             direction="column"
             alignItems="center"
-            data-sal="slide-up"
-            data-sal-duration="500"
+            data-sal={SLIDE_UP_ANIMATION}
+            data-sal-duration={SLIDE_UP_DURATION}
             className={classes.reference}
           >
             <Img fluid={reference.image.fluid} className={classes.image} />
