@@ -5,6 +5,7 @@ import cx from 'classnames';
 import { IconType } from 'react-icons';
 import { IoMdMail, IoLogoFacebook } from 'react-icons/io';
 import { FaPhone } from 'react-icons/fa';
+import { BiLinkExternal } from 'react-icons/bi';
 import { RiArrowDownSLine } from 'react-icons/ri';
 import ReactMarkdown from 'react-markdown';
 
@@ -13,11 +14,12 @@ import FlexContainer from './FlexContainer';
 import LocaleSelector from '../components/LocaleSelector';
 import ImageBlur from '../components/ImageBlur';
 import { IPersonalInfo, ILocale, ITheme, IScrollSection } from '../interfaces';
-import { spacing, scrollTo } from '../utils';
+import { spacing, scrollTo, hexToRgba } from '../utils';
 import { PDF_MODE, SLIDE_UP_ANIMATION, SLIDE_UP_DURATION } from '../constants';
 import useWindowSize from '../hooks/useWindowSize';
 import useTheme from '../hooks/useTheme';
 import useGlobalStyles from '../hooks/useGlobalStyles';
+import translations from '../../assets/json/translations.json';
 
 interface IProps {
   info: IPersonalInfo | null;
@@ -91,6 +93,15 @@ const useStyles = createUseStyles((theme: ITheme) => ({
       marginRight: 0,
       marginBottom: spacing(2),
     },
+  },
+  pdfLink: {
+    backgroundColor: hexToRgba(theme.colors.primary, 0.1),
+    display: 'inline-flex',
+    direction: 'row',
+    alignItems: 'center',
+    padding: spacing(1, 2),
+    borderRadius: theme.dimensions.borderRadiusLg,
+    fontSize: 15,
   },
   arrowContainer: {
     position: 'absolute',
@@ -221,10 +232,21 @@ const Header: React.FC<IProps> = ({
                   Icon={IoLogoFacebook}
                 />
               </FlexContainer>
-              <div style={{ marginBottom: PDF_MODE ? 0 : spacing(3) }}>
+              <div style={{ marginBottom: spacing(3) }}>
                 <ReactMarkdown>{info.about.about}</ReactMarkdown>
               </div>
-              {pageSections.map(renderButton)}
+              {PDF_MODE ? (
+                <div className={classes.pdfLink}>
+                  {translations.generatedPDF[locale]}:{' '}
+                  {translations.url[locale]}
+                  <BiLinkExternal
+                    size={20}
+                    style={{ marginLeft: spacing(1) }}
+                  />
+                </div>
+              ) : (
+                pageSections.map(renderButton)
+              )}
             </div>
           </div>
         </div>
@@ -289,7 +311,7 @@ const Header: React.FC<IProps> = ({
       <Button
         key={section.id}
         size="small"
-        className={cx(classes.button, global.hidePdf)}
+        className={classes.button}
         onClick={() => scrollTo(section.scrollId)}
       >
         {section.title}

@@ -10,5 +10,9 @@
   "backToTop": {
     "is": "Efst á síðu",
     "en-US": "Back to top"
+  },
+  "generatedPDF": {
+    "is": "Þetta PDF var búið til útfrá",
+    "en-US": "This PDF was generated from"
   }
 }
