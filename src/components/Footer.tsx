@@ -53,6 +53,10 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     right: -10,
     cursor: 'pointer',
   },
+  pdfLink: {
+    color: theme.colors.white,
+    textDecoration: 'none',
+  },
 }));
 
 const Footer: React.FC<IProps> = ({ info, locale, scrollToTop }) => {
@@ -71,9 +75,14 @@ const Footer: React.FC<IProps> = ({ info, locale, scrollToTop }) => {
         <FlexContainer className={classes.content}>
           <p className={classes.name}>{info.name}</p>
           {PDF_MODE ? (
-            <p style={{ color: theme.colors.white }}>
+            <a
+              className={classes.pdfLink}
+              href={`https://www.gunnarbirnir.com/${
+                locale === 'en-US' ? 'en' : ''
+              }`}
+            >
               {translations.url[locale]}
-            </p>
+            </a>
           ) : (
             <div className={classes.backToTop} onClick={scrollToTop}>
               <p style={{ marginRight: 40 }}>

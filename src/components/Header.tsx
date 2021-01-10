@@ -74,7 +74,6 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     maxWidth: CONTENT_WIDTH,
     display: 'flex',
     flexDirection: 'row',
-    paddingBottom: 35,
     [theme.mediaQueries.xsDown]: {
       flexDirection: 'column',
       alignItems: 'center',
@@ -95,6 +94,8 @@ const useStyles = createUseStyles((theme: ITheme) => ({
     },
   },
   pdfLink: {
+    textDecoration: 'none',
+    color: theme.colors.textPrimary,
     backgroundColor: hexToRgba(theme.colors.primary, 0.1),
     display: 'inline-flex',
     direction: 'row',
@@ -199,6 +200,7 @@ const Header: React.FC<IProps> = ({
         <div className={cx(classes.flexContainer, classes.contentContainer)}>
           <div
             className={classes.content}
+            style={{ paddingBottom: PDF_MODE ? 0 : 35 }}
             data-sal={SLIDE_UP_ANIMATION}
             data-sal-duration={SLIDE_UP_DURATION}
           >
@@ -236,14 +238,19 @@ const Header: React.FC<IProps> = ({
                 <ReactMarkdown>{info.about.about}</ReactMarkdown>
               </div>
               {PDF_MODE ? (
-                <div className={classes.pdfLink}>
+                <a
+                  className={classes.pdfLink}
+                  href={`https://www.gunnarbirnir.com/${
+                    locale === 'en-US' ? 'en' : ''
+                  }`}
+                >
                   {translations.generatedPDF[locale]}:{' '}
                   {translations.url[locale]}
                   <BiLinkExternal
                     size={20}
                     style={{ marginLeft: spacing(1) }}
                   />
-                </div>
+                </a>
               ) : (
                 pageSections.map(renderButton)
               )}
