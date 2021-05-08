@@ -3,7 +3,7 @@ import { createUseStyles } from 'react-jss';
 import Img from 'gatsby-image';
 import cx from 'classnames';
 import { IconType } from 'react-icons';
-import { IoMdMail, IoLogoFacebook } from 'react-icons/io';
+import { IoMdMail, IoLogoLinkedin } from 'react-icons/io';
 import { FaPhone } from 'react-icons/fa';
 import { BiLinkExternal } from 'react-icons/bi';
 import { RiArrowDownSLine } from 'react-icons/ri';
@@ -229,10 +229,16 @@ const Header: React.FC<IProps> = ({
                 />
                 <ContactInfo
                   newTab
+                  text={info.linkedIn}
+                  link={`https://www.linkedin.com/in/${info.linkedIn}`}
+                  Icon={IoLogoLinkedin}
+                />
+                {/* <ContactInfo
+                  newTab
                   text={info.facebook}
                   link={`https://www.facebook.com/${info.facebook}`}
                   Icon={IoLogoFacebook}
-                />
+                /> */}
               </FlexContainer>
               <div style={{ marginBottom: spacing(3) }}>
                 <ReactMarkdown>{info.about.about}</ReactMarkdown>

@@ -63,6 +63,7 @@ export interface IPersonalInfo extends IContentfulData {
   jobTitle: string;
   phoneNumber: string;
   facebook: string;
+  linkedIn: string;
   about: {
     about: string;
   };
