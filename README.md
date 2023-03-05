@@ -1,4 +1,4 @@
-# Gunnars resume
+# Resume 2.0
 
 ## How to export PDF
 
