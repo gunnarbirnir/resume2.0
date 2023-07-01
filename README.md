@@ -1,5 +1,7 @@
 # Resume 2.0
 
+See here: [Resume](https://nifty-snyder-d00b99.netlify.app/)
+
 ## How to export PDF
 
 1. Run app in PDF mode: `yarn pdf-mode`
