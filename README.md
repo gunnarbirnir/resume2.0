@@ -1,6 +1,6 @@
 # Resume 2.0
 
-See here: [Resume](https://nifty-snyder-d00b99.netlify.app/)
+See here: [Resume 2.0](https://nifty-snyder-d00b99.netlify.app/)
 
 ## How to export PDF
 
